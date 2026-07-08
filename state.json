@@ -1,15 +1,18 @@
 {
   "seen_urls": [
-    "https://careers.microsoft.com/v2/global/en/exploremicrosoft",
-    "https://job-boards.greenhouse.io/anthropic/jobs/5023394008",
-    "https://deepmind.google/student-researcher-program/",
     "https://www.metacareers.com/careerprograms/pathways/metauniversity",
-    "https://www.metacareers.com/careerprograms/students",
     "https://nvidia.wd5.myworkdayjobs.com/en-US/NVIDIAExternalCareerSite/job/NVIDIA-2026-Ignite-Internships--Software-Engineering_JR2005168",
     "https://jobs.anitab.org/companies/nvidia/jobs/59992859-nvidia-2026-ignite-internships-software-engineering",
     "https://careers.linkedin.com/reach/AI",
     "https://job-boards.greenhouse.io/xai/jobs/5054417007",
-    "https://machinelearning.apple.com/updates/aiml-residency-program-application-2026"
+    "https://machinelearning.apple.com/updates/aiml-residency-program-application-2026",
+    "https://www.bvp.com/bessemer-fellows",
+    "https://github-externships.github.io/externship",
+    "https://www.janestreet.com/join-jane-street/programs-and-events/insight/",
+    "https://escience.washington.edu/using-data-science/data-science-for-social-good/",
+    "https://code.org/beyond/internships",
+    "https://www.uber.com/us/en/careers/teams/university/",
+    "https://fellows.kleinerperkins.com/"
   ],
   "last_bucket": "bigtech"
 }
