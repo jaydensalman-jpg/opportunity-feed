@@ -50,6 +50,7 @@ You are running inside a checkout of my `opportunity-feed` git repo. All paths a
   "pitch": "Strong AI + social impact fit.",
   "bullet": "Selected for AI-for-good fellowship building ML tools.",
   "deadline": "2026-08-15",
+  "opens": "2026-07",
   "found_at": "2026-07-07T19:49:05+00:00"
 }
 ```
@@ -67,6 +68,7 @@ You are running inside a checkout of my `opportunity-feed` git repo. All paths a
 - `pitch`: one sentence (≤120 chars) on why **I** specifically fit, grounded in my profile.
 - `bullet`: the past-tense resume bullet I could earn by completing it.
 - `deadline`: `YYYY-MM-DD` from the page, or the literal string `"unknown"` if not stated.
+- `opens`: `YYYY-MM` when the application window opens — the posted month if stated, a best estimate from the prior cycle otherwise; the current month for rolling/already-open applications; `""` if you can't tell. When re-checking an entry, replace the estimate with the real `deadline` as soon as one is posted.
 - `found_at`: this run's UTC timestamp, ISO 8601 with offset.
 - Unknowable text fields: use `""` (the dashboard renders them as "—"). Never fabricate a value.
 

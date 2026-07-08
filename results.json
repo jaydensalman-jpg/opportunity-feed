@@ -11,7 +11,8 @@
     "pitch": "12-week SWE/PM rotation for 2nd-years at Microsoft's Redmond HQ — a home-turf resume boost.",
     "bullet": "Selected for Microsoft's Explore Program, rotating through software engineering and product management on a Redmond-based team.",
     "deadline": "unknown",
-    "found_at": "2026-07-08T01:16:02+00:00"
+    "found_at": "2026-07-08T01:16:02+00:00",
+    "opens": "2026-08"
   },
   {
     "id": "bigtech:https://job-boards.greenhouse.io/anthropic/jobs/5023394008",
@@ -25,7 +26,8 @@
     "pitch": "Funded 4-month AI safety research fellowship with mentorship — strong AI/ML fit, though full-time and competitive.",
     "bullet": "Completed a 4-month Anthropic Fellows research project on AI safety, culminating in a public research output.",
     "deadline": "unknown",
-    "found_at": "2026-07-08T01:16:02+00:00"
+    "found_at": "2026-07-08T01:16:02+00:00",
+    "opens": "2026-07"
   },
   {
     "id": "bigtech:https://deepmind.google/student-researcher-program/",
@@ -39,7 +41,8 @@
     "pitch": "Paid AI research internship alongside DeepMind/Google Research scientists — strong ML-research resume line.",
     "bullet": "Contributed as a Student Researcher on a Google DeepMind AI research project alongside research scientists.",
     "deadline": "unknown",
-    "found_at": "2026-07-08T01:16:02+00:00"
+    "found_at": "2026-07-08T01:16:02+00:00",
+    "opens": "2026-09"
   },
   {
     "id": "bigtech:https://www.citadel.com/careers/details/launch-intern-us/",
@@ -53,7 +56,8 @@
     "pitch": "Sophomore-only 11-wk engineering program at $4.3–4.8k/WEEK — Summer 2027 apps already open, rolling.",
     "bullet": "Selected for Citadel's Launch engineering internship, building software with quantitative trading teams.",
     "deadline": "unknown",
-    "found_at": "2026-07-08T04:21:14+00:00"
+    "found_at": "2026-07-08T04:21:14+00:00",
+    "opens": "2026-07"
   },
   {
     "id": "bigtech:https://www.google.com/about/careers/applications/buildyourfuture/programs/step",
@@ -67,7 +71,8 @@
     "pitch": "Google's 1st/2nd-year SWE internship — flagship target; window opens ~Sept and lasts only 2–4 weeks.",
     "bullet": "Selected for Google's Associate Software Developer Internship, shipping production code with a Google engineering team.",
     "deadline": "unknown",
-    "found_at": "2026-07-08T04:21:14+00:00"
+    "found_at": "2026-07-08T04:21:14+00:00",
+    "opens": "2026-09"
   },
   {
     "id": "bigtech:https://www.metacareers.com/careerprograms/students",
@@ -81,7 +86,8 @@
     "pitch": "Paid early-ID track (eng/analytics/design), ~$50–65/hr + housing; apps Nov–Jan; fast-track to Meta SWE intern.",
     "bullet": "Completed Meta University's engineering track, building and shipping a capstone product with a Meta mentor.",
     "deadline": "unknown",
-    "found_at": "2026-07-08T04:21:14+00:00"
+    "found_at": "2026-07-08T04:21:14+00:00",
+    "opens": "2026-11"
   },
   {
     "id": "bigtech:https://www.nvidia.com/en-us/about-nvidia/careers/university-recruiting/",
@@ -95,7 +101,8 @@
     "pitch": "Pre-internship for 1st/2nd-years; 2027 window expected early Oct and lasts ~2 weeks — calendar it now.",
     "bullet": "Selected for NVIDIA's Ignite program, working hands-on with NVIDIA engineers on a summer technical project.",
     "deadline": "unknown",
-    "found_at": "2026-07-08T04:21:14+00:00"
+    "found_at": "2026-07-08T04:21:14+00:00",
+    "opens": "2026-10"
   },
   {
     "id": "bigtech:https://www.palantir.com/careers/students-and-early-talent/",
@@ -109,7 +116,8 @@
     "pitch": "For sophomores/juniors with NO prior tech internship — exactly your spot; opens Aug, deadline ~early Oct.",
     "bullet": "Completed Palantir's Path internship, contributing production code alongside forward-deployed engineers.",
     "deadline": "unknown",
-    "found_at": "2026-07-08T04:21:14+00:00"
+    "found_at": "2026-07-08T04:21:14+00:00",
+    "opens": "2026-08"
   },
   {
     "id": "bigtech:https://careers.duolingo.com/?type=Thrive+Program",
@@ -123,7 +131,8 @@
     "pitch": "10-wk program for 2nd-years (SWE/APM/design); opens ~Aug — your INFO 360 product work is the fit story.",
     "bullet": "Selected for Duolingo's Thrive Program, shipping features on a product used by hundreds of millions of learners.",
     "deadline": "unknown",
-    "found_at": "2026-07-08T04:21:14+00:00"
+    "found_at": "2026-07-08T04:21:14+00:00",
+    "opens": "2026-08"
   },
   {
     "id": "bigtech:https://jobs.uber.com/en/teams/emerging-talent/",
@@ -137,7 +146,8 @@
     "pitch": "Early-career internship for 1st/2nd-years; opens ~Sept–Oct, closes Nov–Dec — apply in the first weeks.",
     "bullet": "Completed Uber's STAR internship, delivering a data-driven project with mentorship from Uber engineers.",
     "deadline": "unknown",
-    "found_at": "2026-07-08T04:21:14+00:00"
+    "found_at": "2026-07-08T04:21:14+00:00",
+    "opens": "2026-09"
   },
   {
     "id": "bigtech:https://www.twosigma.com/careers/internships/",
@@ -151,7 +161,8 @@
     "pitch": "10-wk quant/SWE internships with a dedicated freshman/early program; opens Aug–Sept, deadlines Oct–Nov.",
     "bullet": "Built data-intensive software systems as a Two Sigma software engineering intern in New York.",
     "deadline": "unknown",
-    "found_at": "2026-07-08T04:21:14+00:00"
+    "found_at": "2026-07-08T04:21:14+00:00",
+    "opens": "2026-08"
   },
   {
     "id": "bigtech:https://www.bloomberg.com/company/early-careers/internship/",
@@ -165,7 +176,8 @@
     "pitch": "10–12 wk SWE internship open to all class years, production code from day one; opens ~Aug–Sept.",
     "bullet": "Shipped production C++/Python code for real-time financial systems as a Bloomberg SWE intern.",
     "deadline": "unknown",
-    "found_at": "2026-07-08T04:21:14+00:00"
+    "found_at": "2026-07-08T04:21:14+00:00",
+    "opens": "2026-08"
   },
   {
     "id": "bigtech:https://www.amazon.jobs/teams/internships-for-students",
@@ -179,7 +191,8 @@
     "pitch": "First mover of the 2027 wave — SDE postings drop late Jul–Aug; rolling, hometown, apply in week one.",
     "bullet": "Built and deployed production services on AWS as an Amazon SDE intern in Seattle.",
     "deadline": "unknown",
-    "found_at": "2026-07-08T04:21:14+00:00"
+    "found_at": "2026-07-08T04:21:14+00:00",
+    "opens": "2026-08"
   },
   {
     "id": "bigtech:https://www.databricks.com/company/careers/university-recruiting",
@@ -193,7 +206,8 @@
     "pitch": "2027 SWE intern cycle takes 2028 grads — you qualify; posts early (Jul–Aug) and pays top of market.",
     "bullet": "Built data/ML platform features as a Databricks software engineering intern.",
     "deadline": "unknown",
-    "found_at": "2026-07-08T04:21:14+00:00"
+    "found_at": "2026-07-08T04:21:14+00:00",
+    "opens": "2026-07"
   },
   {
     "id": "bigtech:https://x.ai/careers",
@@ -207,7 +221,8 @@
     "pitch": "12-wk engineering internships incl. a Seattle office; projects-over-pedigree culture suits your shipped apps.",
     "bullet": "Built backend and AI-application systems as an xAI engineering intern.",
     "deadline": "unknown",
-    "found_at": "2026-07-08T04:21:14+00:00"
+    "found_at": "2026-07-08T04:21:14+00:00",
+    "opens": ""
   },
   {
     "id": "bigtech:https://openai.com/careers/emerging-talent/",
@@ -221,7 +236,8 @@
     "pitch": "SWE internships + co-ops for students; Summer 2027 postings surface in fall — set alerts now.",
     "bullet": "Developed infrastructure and product features as an OpenAI software engineering intern.",
     "deadline": "unknown",
-    "found_at": "2026-07-08T04:21:14+00:00"
+    "found_at": "2026-07-08T04:21:14+00:00",
+    "opens": "2026-09"
   },
   {
     "id": "bigtech:https://www.zillow.com/careers/internships/",
@@ -235,7 +251,8 @@
     "pitch": "~130 intern spots, fully remote, ~$52/hr; React/TS stack matches yours; postings open in fall.",
     "bullet": "Shipped React/TypeScript features for Zillow products reaching millions of users as an SDE intern.",
     "deadline": "unknown",
-    "found_at": "2026-07-08T04:21:14+00:00"
+    "found_at": "2026-07-08T04:21:14+00:00",
+    "opens": "2026-09"
   },
   {
     "id": "bigtech:https://www.anthropic.com/claude-corps/fellow",
@@ -249,7 +266,8 @@
     "pitch": "$85K 12-month AI-for-good fellowship; Cohort 1 deadline Jul 17(!), later cohorts Jan + Aug 2027 — gap-year option.",
     "bullet": "Served as a Claude Corps fellow, deploying AI tools inside a mission-driven nonprofit for a year.",
     "deadline": "2026-07-17",
-    "found_at": "2026-07-08T04:21:14+00:00"
+    "found_at": "2026-07-08T04:21:14+00:00",
+    "opens": "2026-07"
   },
   {
     "id": "niche:https://codingitforward.com/fellowship",
@@ -263,7 +281,8 @@
     "pitch": "Flagship civic-tech summer fellowship in federal agencies; 2026 closed — 2027 apps expected Jan–Feb.",
     "bullet": "Selected as a Coding it Forward fellow, building software/data tools inside a US federal agency.",
     "deadline": "unknown",
-    "found_at": "2026-07-08T04:21:14+00:00"
+    "found_at": "2026-07-08T04:21:14+00:00",
+    "opens": "2027-01"
   },
   {
     "id": "niche:https://cohere.com/research/scholars-program",
@@ -277,7 +296,8 @@
     "pitch": "8-month paid ML research, no publications required; apps open ~Aug for Jan 2027 start (full-time, gap-friendly).",
     "bullet": "Conducted mentored ML research as a Cohere Labs Scholar, contributing to a publishable research project.",
     "deadline": "unknown",
-    "found_at": "2026-07-08T04:21:14+00:00"
+    "found_at": "2026-07-08T04:21:14+00:00",
+    "opens": "2026-08"
   },
   {
     "id": "niche:https://www.outreachy.org/apply/",
@@ -291,7 +311,8 @@
     "pitch": "Paid remote open-source internship for underrepresented groups; Dec 2026 cohort initial apps ~Aug.",
     "bullet": "Completed a paid Outreachy internship contributing production code to a major open-source project.",
     "deadline": "unknown",
-    "found_at": "2026-07-08T04:21:14+00:00"
+    "found_at": "2026-07-08T04:21:14+00:00",
+    "opens": "2026-08"
   },
   {
     "id": "niche:https://fellowship.mlh.com/",
@@ -305,7 +326,8 @@
     "pitch": "12-wk remote internship-alternative with stipend, backed by GitHub/Meta/Google; rolling — apply early for Fall.",
     "bullet": "Selected for the MLH Fellowship, collaborating on real open-source projects used by top companies.",
     "deadline": "unknown",
-    "found_at": "2026-07-08T04:21:14+00:00"
+    "found_at": "2026-07-08T04:21:14+00:00",
+    "opens": "2026-07"
   },
   {
     "id": "niche:https://summerofcode.withgoogle.com/",
@@ -319,7 +341,8 @@
     "pitch": "Paid open-source summer with a Google line on your resume; 2027 apps ~Mar–Apr — pick an org and start contributing now.",
     "bullet": "Completed Google Summer of Code, designing and shipping a funded open-source project over 12+ weeks.",
     "deadline": "unknown",
-    "found_at": "2026-07-08T04:21:14+00:00"
+    "found_at": "2026-07-08T04:21:14+00:00",
+    "opens": "2027-03"
   },
   {
     "id": "niche:https://buildyourfuture.withgoogle.com/scholarships/generation-google-scholarship",
@@ -333,7 +356,8 @@
     "pitch": "$10K + Google Scholars' Retreat for CS-adjacent students; applications typically ~Feb–Apr.",
     "bullet": "Awarded the Generation Google Scholarship for leadership and impact in computer science.",
     "deadline": "unknown",
-    "found_at": "2026-07-08T04:21:14+00:00"
+    "found_at": "2026-07-08T04:21:14+00:00",
+    "opens": "2027-02"
   },
   {
     "id": "startup:https://www.kleinerperkins.com/fellows",
@@ -347,7 +371,8 @@
     "pitch": "Paid summer at a top KP portfolio startup (Figma/Stripe tier); 2026 closed — 2027 apps expected ~Nov–Jan.",
     "bullet": "Selected as a Kleiner Perkins Engineering Fellow, shipping product at a high-growth KP portfolio startup.",
     "deadline": "unknown",
-    "found_at": "2026-07-08T04:21:14+00:00"
+    "found_at": "2026-07-08T04:21:14+00:00",
+    "opens": "2026-11"
   },
   {
     "id": "startup:https://8vc.com/fellowships",
@@ -361,7 +386,8 @@
     "pitch": "3-month summer at an 8VC portfolio startup; sophomores eligible; currently closed — reopens for 2027.",
     "bullet": "Built product as an 8VC Engineering Fellow embedded in a fast-growing portfolio startup.",
     "deadline": "unknown",
-    "found_at": "2026-07-08T04:21:14+00:00"
+    "found_at": "2026-07-08T04:21:14+00:00",
+    "opens": "2026-11"
   },
   {
     "id": "startup:https://www.zfellows.com/",
@@ -375,7 +401,8 @@
     "pitch": "$10K + a week with unicorn founders; rolling apps, students welcome — pitch SpeakCoach or Husky Planner.",
     "bullet": "Selected for Z Fellows, a competitive founder program, and received a $10K investment in my project.",
     "deadline": "unknown",
-    "found_at": "2026-07-08T04:21:14+00:00"
+    "found_at": "2026-07-08T04:21:14+00:00",
+    "opens": "2026-07"
   },
   {
     "id": "startup:https://research.contrary.com/fellowship",
@@ -389,7 +416,8 @@
     "pitch": "Write published deep-dives on private tech companies; Q3 deadline Oct 23, Q4 Dec 9 — writing + tech literacy.",
     "bullet": "Published tech-company research memos as a Contrary Research Fellow.",
     "deadline": "2026-10-23",
-    "found_at": "2026-07-08T04:21:14+00:00"
+    "found_at": "2026-07-08T04:21:14+00:00",
+    "opens": "2026-07"
   },
   {
     "id": "research:https://allenai.org/internships",
@@ -403,7 +431,8 @@
     "pitch": "Seattle AI research internships, rolling year-round; undergrads eligible for research roles, publications encouraged.",
     "bullet": "Conducted AI research at the Allen Institute for AI, contributing to a published research project.",
     "deadline": "unknown",
-    "found_at": "2026-07-08T04:21:14+00:00"
+    "found_at": "2026-07-08T04:21:14+00:00",
+    "opens": "2026-07"
   },
   {
     "id": "research:https://www.nsf.gov/funding/initiatives/reu/students",
@@ -417,7 +446,8 @@
     "pitch": "Paid summer research for US citizens/PRs; Summer 2027 deadlines mostly Jan–Mar — shortlist AI/HCI sites in Dec.",
     "bullet": "Completed an NSF-funded Research Experience for Undergraduates in AI/ML, presenting original research results.",
     "deadline": "unknown",
-    "found_at": "2026-07-08T04:21:14+00:00"
+    "found_at": "2026-07-08T04:21:14+00:00",
+    "opens": "2026-12"
   },
   {
     "id": "research:https://science.osti.gov/wdts/suli",
@@ -431,7 +461,8 @@
     "pitch": "Paid DOE lab research with housing allowance; Summer 2027 apps open ~Oct, close early Jan — PNNL is in-state.",
     "bullet": "Conducted data-science research at a DOE national laboratory through the SULI program.",
     "deadline": "unknown",
-    "found_at": "2026-07-08T04:21:14+00:00"
+    "found_at": "2026-07-08T04:21:14+00:00",
+    "opens": "2026-10"
   },
   {
     "id": "research:https://www.cs.washington.edu/academics/undergraduate/research-opportunities/",
@@ -445,7 +476,8 @@
     "pitch": "Email faculty/PhD students NOW for autumn positions; open to non-CSE majors; most positions go to proactive emailers.",
     "bullet": "Conducted machine-learning research in a UW Allen School lab under faculty mentorship.",
     "deadline": "unknown",
-    "found_at": "2026-07-08T04:21:14+00:00"
+    "found_at": "2026-07-08T04:21:14+00:00",
+    "opens": "2026-07"
   },
   {
     "id": "uni:https://careers.t-mobile.com/internship",
@@ -459,7 +491,8 @@
     "pitch": "11-wk paid internships at Bellevue HQ (software + data tracks); postings run fall through February.",
     "bullet": "Delivered a production data/software project as a T-Mobile summer intern at Bellevue HQ.",
     "deadline": "unknown",
-    "found_at": "2026-07-08T04:21:14+00:00"
+    "found_at": "2026-07-08T04:21:14+00:00",
+    "opens": "2026-09"
   },
   {
     "id": "uni:https://careers.expediagroup.com/emerging-talent-and-careers/",
@@ -473,7 +506,8 @@
     "pitch": "8–14 wk Seattle internships across SWE/ML/data; you'll be a rising junior for Summer 2027 — in range.",
     "bullet": "Built travel-tech features as an Expedia Group software engineering intern in Seattle.",
     "deadline": "unknown",
-    "found_at": "2026-07-08T04:21:14+00:00"
+    "found_at": "2026-07-08T04:21:14+00:00",
+    "opens": "2026-09"
   },
   {
     "id": "uni:https://dubhacks.co/",
@@ -487,7 +521,8 @@
     "pitch": "UW's flagship hackathon (~Oct), largest in the PNW; lowest-effort resume line + recruiter access on campus.",
     "bullet": "Built and demoed a working product in 24 hours at DubHacks, the largest hackathon in the Pacific Northwest.",
     "deadline": "unknown",
-    "found_at": "2026-07-08T04:21:14+00:00"
+    "found_at": "2026-07-08T04:21:14+00:00",
+    "opens": "2026-09"
   },
   {
     "id": "uni:https://github.com/zapplyjobs/underclassmen-internships",
@@ -501,7 +536,8 @@
     "pitch": "Curated freshman/sophomore-ONLY internship list; several marked open now (Dropbox, NASA, Ramp) — check weekly.",
     "bullet": "",
     "deadline": "unknown",
-    "found_at": "2026-07-08T04:21:14+00:00"
+    "found_at": "2026-07-08T04:21:14+00:00",
+    "opens": "2026-07"
   },
   {
     "id": "uni:https://github.com/speedyapply/2027-AI-College-Jobs",
@@ -515,6 +551,7 @@
     "pitch": "149 US AI/ML internships with salaries + direct links, updated daily — your weekly check from August on.",
     "bullet": "",
     "deadline": "unknown",
-    "found_at": "2026-07-08T04:21:14+00:00"
+    "found_at": "2026-07-08T04:21:14+00:00",
+    "opens": "2026-07"
   }
 ]
