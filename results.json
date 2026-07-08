@@ -1,1 +1,41 @@
-[]
+[
+  {
+    "id": "bigtech:https://careers.microsoft.com/v2/global/en/exploremicrosoft",
+    "title": "Explore Microsoft Program",
+    "company": "Microsoft",
+    "location": "Redmond, WA (+ other US locations)",
+    "url": "https://careers.microsoft.com/v2/global/en/exploremicrosoft",
+    "source": "Big tech sweep",
+    "score": 85,
+    "pitch": "12-week SWE/PM rotation for 2nd-years at Microsoft's Redmond HQ — a home-turf resume boost.",
+    "bullet": "Selected for Microsoft's Explore Program, rotating through software engineering and product management on a Redmond-based team.",
+    "deadline": "unknown",
+    "found_at": "2026-07-08T01:16:02+00:00"
+  },
+  {
+    "id": "bigtech:https://job-boards.greenhouse.io/anthropic/jobs/5023394008",
+    "title": "Anthropic Fellows Program",
+    "company": "Anthropic",
+    "location": "Berkeley, CA / London, UK / Remote (US, UK, CA)",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5023394008",
+    "source": "Big tech sweep",
+    "score": 78,
+    "pitch": "Funded 4-month AI safety research fellowship with mentorship — strong AI/ML fit, though full-time and highly competitive.",
+    "bullet": "Completed a 4-month Anthropic Fellows research project on AI safety, culminating in a public research output.",
+    "deadline": "unknown",
+    "found_at": "2026-07-08T01:16:02+00:00"
+  },
+  {
+    "id": "bigtech:https://deepmind.google/student-researcher-program/",
+    "title": "Student Researcher Program",
+    "company": "Google DeepMind",
+    "location": "Google offices (various, in-person)",
+    "url": "https://deepmind.google/student-researcher-program/",
+    "source": "Big tech sweep",
+    "score": 82,
+    "pitch": "Paid AI research internship alongside DeepMind/Google Research scientists — strong ML-research resume line.",
+    "bullet": "Contributed as a Student Researcher on a Google DeepMind AI research project alongside research scientists.",
+    "deadline": "unknown",
+    "found_at": "2026-07-08T01:16:02+00:00"
+  }
+]
