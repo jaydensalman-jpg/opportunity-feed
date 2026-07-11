@@ -553,5 +553,35 @@
     "deadline": "unknown",
     "found_at": "2026-07-08T04:21:14+00:00",
     "opens": "2026-07"
+  },
+  {
+    "id": "niche:https://www.breakthroughtech.org/programs/the-ai-program/",
+    "title": "Break Through Tech AI Program",
+    "company": "Break Through Tech (Cornell Tech)",
+    "location": "Virtual (US)",
+    "url": "https://www.breakthroughtech.org/programs/the-ai-program/",
+    "source": "Niche sweep",
+    "score": 85,
+    "level": "open-to-all",
+    "pitch": "Free 1-year virtual ML program + Cornell certificate; no experience needed; apps open early Dec.",
+    "bullet": "Earned a Cornell University machine learning certificate through Break Through Tech's year-long AI program, building a real-world ML portfolio project.",
+    "deadline": "unknown",
+    "opens": "2026-12",
+    "found_at": "2026-07-11T07:04:42+00:00"
+  },
+  {
+    "id": "niche:https://ai-4-all.org/ai4all-ignite/",
+    "title": "AI4ALL Ignite Accelerator",
+    "company": "AI4ALL",
+    "location": "Remote (US)",
+    "url": "https://ai-4-all.org/ai4all-ignite/",
+    "source": "Niche sweep",
+    "score": 76,
+    "level": "open-to-all",
+    "pitch": "Free two-semester AI accelerator with industry mentorship; 2026 closed — next cohort expected early 2027.",
+    "bullet": "Completed AI4ALL Ignite, a selective no-cost AI accelerator, shipping a mentored human-centered AI project.",
+    "deadline": "unknown",
+    "opens": "2027-02",
+    "found_at": "2026-07-11T07:04:42+00:00"
   }
 ]
