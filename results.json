@@ -25,7 +25,7 @@
     "level": "advanced",
     "pitch": "Funded 4-month AI safety research fellowship with mentorship — strong AI/ML fit, though full-time and competitive.",
     "bullet": "Completed a 4-month Anthropic Fellows research project on AI safety, culminating in a public research output.",
-    "deadline": "unknown",
+    "deadline": "2026-07-26",
     "found_at": "2026-07-08T01:16:02+00:00",
     "opens": "2026-07"
   },
@@ -583,5 +583,50 @@
     "deadline": "unknown",
     "opens": "2027-02",
     "found_at": "2026-07-11T07:04:42+00:00"
+  },
+  {
+    "id": "research:https://ict.usc.edu/careers/internships/summer-research-program-application/",
+    "title": "Summer Research Program (REU) — AI & Interactive Virtual Experiences",
+    "company": "USC Institute for Creative Technologies",
+    "location": "Playa Vista, CA (in-person)",
+    "url": "https://ict.usc.edu/careers/internships/summer-research-program-application/",
+    "source": "Research sweep",
+    "score": 76,
+    "level": "open-to-all",
+    "pitch": "NSF-funded AI/dialogue-systems REU welcoming CS + adjacent majors — a direct extension of your SEAL AI research background.",
+    "bullet": "Conducted NSF-funded AI and dialogue-systems research as a Summer Research Program fellow at USC's Institute for Creative Technologies.",
+    "deadline": "unknown",
+    "opens": "2026-12",
+    "found_at": "2026-07-14T18:36:02+00:00"
+  },
+  {
+    "id": "research:https://www.microsoft.com/en-us/research/academic-program/undergraduate-research-internship-computing/",
+    "title": "Undergraduate Research Internship — Computing",
+    "company": "Microsoft Research",
+    "location": "Redmond, WA / New York, NY / New England",
+    "url": "https://www.microsoft.com/en-us/research/academic-program/undergraduate-research-internship-computing/",
+    "source": "Research sweep",
+    "score": 87,
+    "level": "advanced",
+    "pitch": "Flagship MSR research internship in your Redmond backyard — you'll hit rising-junior eligibility exactly for Summer 2027.",
+    "bullet": "Conducted computing research at Microsoft Research as an Undergraduate Research Intern in Redmond, WA.",
+    "deadline": "unknown",
+    "opens": "2026-08",
+    "found_at": "2026-07-14T18:36:02+00:00"
+  },
+  {
+    "id": "research:https://cra.org/cra-wp/dreu/",
+    "title": "DREU — AI & Quantum Information Science Track",
+    "company": "CRA-WP (Computing Research Association)",
+    "location": "Host university (varies, US)",
+    "url": "https://cra.org/cra-wp/dreu/",
+    "source": "Research sweep",
+    "score": 83,
+    "level": "open-to-all",
+    "pitch": "$9K paid AI research placement with a mentor + national cohort, no prior research required — a strong on-ramp before advanced REUs.",
+    "bullet": "Completed a CRA-WP DREU-funded AI research placement with a faculty mentor, presenting to a national student cohort.",
+    "deadline": "unknown",
+    "opens": "2027-01",
+    "found_at": "2026-07-14T18:36:02+00:00"
   }
 ]
