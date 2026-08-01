@@ -32,8 +32,50 @@ You are running inside a checkout of my `opportunity-feed` git repo. All paths a
    - Backfill `level` on up to 5 entries missing it, judging from each posting's stated eligibility.
    - Dedupe by canonical URL against `results.json`, `archive.json`, and `seen_urls`.
    - Cap `results.json` at 100 entries; archive the lowest-scored overflow.
-7. **Validate, commit, push.** `results.json` must parse as a JSON array matching the schema (`node -e 'const d=JSON.parse(require("fs").readFileSync("results.json","utf8")); if(!Array.isArray(d)) process.exit(1)'`). If validation fails, restore the previous version via git and report the failure instead of pushing garbage. Commit only `results.json`, `archive.json`, `state.json` with message `sweep(<bucket>): +<new> -<archived> (<YYYY-MM-DD>)`, then push; if rejected, `git pull --rebase` and retry once.
-8. **Report.** End with: bucket swept, queries used, found/rejected counts (one line per rejection reason), current feed size, and the top 3 new finds.
+7. **Run the prep layer.** Do this every sweep, after the opportunity work — it is what keeps the feed useful during months when nothing is open. See the "Prep layer" section below.
+8. **Validate, commit, push.** `results.json` and `resources.json` must each parse as a JSON array matching their schema (`node -e 'const d=JSON.parse(require("fs").readFileSync("results.json","utf8")); if(!Array.isArray(d)) process.exit(1)'`). If validation fails, restore the previous version via git and report the failure instead of pushing garbage. Commit only `results.json`, `archive.json`, `state.json`, `resources.json` with message `sweep(<bucket>): +<new> -<archived> (<YYYY-MM-DD>)`, then push; if rejected, `git pull --rebase` and retry once.
+9. **Report.** End with: bucket swept, queries used, found/rejected counts (one line per rejection reason), current feed size, the top 3 new finds, and the 30-day radar (below).
+
+## Prep layer
+
+Jayden's application year is extremely lumpy: almost everything for a summer cycle opens in a nine-week stretch from September to October, and several windows are two weeks wide. A sweep that only reports open postings goes silent for months and then floods. These three passes run every sweep and fix that.
+
+**A. 30-day radar.** From the Watchlist table plus every `opens` field in `results.json`, list every program whose window starts within the next 30 days. Put this near the top of the run report, ahead of the new finds — it is the most actionable thing in the report. Call out explicitly any window known to be two weeks or shorter (NVIDIA Ignite is the standing example, ~Oct 6–20).
+
+**B. Resource maintenance.** `resources.json` is a JSON array of standing, mostly-undated resources — research on-ramps, competitions, open-source entry points, communities. Unlike `results.json` these do not expire, so the job is upkeep rather than accumulation:
+- Re-check 3–5 entries per sweep, oldest `verified_at` first. Fetch the page. If it loads and still describes the same thing, update `verified_at` to today and set `"verified": true`. If it 403s, 404s, or renders empty to an automated fetch, set `"verified": false` and write a one-line `note` saying what happened — never silently drop it, and never claim a page loaded when it didn't.
+- Add a resource only when a sweep genuinely turns one up, and only after fetching its page. Zero additions is normal and correct.
+- Retire anything confirmed dead to a `note` plus `"verified": false`; if the org itself is gone, remove the entry.
+- Cap at 40 entries. Prefer specific and actionable over comprehensive.
+
+**C. Dated events.** Hackathons, meetups, and workshops with a real date belong in `resources.json` with a concrete `window`. Once the date has passed by more than 3 days, either update it to the next occurrence if one is posted, or remove it. Recurring series (a monthly meetup) keep a rolling `window` describing the cadence plus the next known date.
+
+### `resources.json` entry schema
+
+```json
+{
+  "id": "<category>:<canonical-url>",
+  "title": "MLH Global Hack Week: Agents",
+  "org": "Major League Hacking",
+  "category": "research | compete | oss | community",
+  "url": "https://ghw.mlh.com/events/generative-ai",
+  "location": "Online",
+  "cost": "Free",
+  "window": "2026-08-07 to 2026-08-13",
+  "why": "One sentence on why this specifically fits Jayden's profile.",
+  "bullet": "Past-tense resume bullet this could earn, or \"\" if it isn't the kind of thing that earns one.",
+  "contact": "optional — email, Discord, Slack",
+  "verified_at": "2026-08-01",
+  "verified": true,
+  "note": "optional — only when verified is false, explaining what failed"
+}
+```
+
+Categories, and what each is for:
+- `research` — the standing gap in his profile; labs, undergrad research orgs, REU-style on-ramps
+- `compete` — anything producing a public rank or a demoed artifact (Kaggle, DrivenData, hackathons)
+- `oss` — open-source contribution paths; a merged PR into a core ML library outranks most listings
+- `community` — Seattle and UW rooms worth being in, weighted toward ones that meet regularly
 
 ## Entry schema — every field, exactly this shape
 
@@ -114,4 +156,5 @@ Known dead ends — do not re-add: LinkedIn REACH (requires completed degree), A
 - **Never invent an opportunity.** Every entry must come from a page you fetched this run, and every field must be grounded in that page's content.
 - Skip: closed/expired postings, full-time-only roles, pay-to-participate programs, and aggregator copies of a posting already in the feed.
 - 5–15 verified new entries per sweep is ideal. Zero is an acceptable outcome — never pad with weak or unverified entries.
-- Touch nothing in the repo except `results.json`, `archive.json`, and `state.json`. No secrets in commits.
+- **Report zero honestly.** During Nov–Aug most cycles are closed and a sweep should legitimately find nothing. Say so plainly and lean on the prep layer; never dress up a quiet market as a productive run.
+- Touch nothing in the repo except `results.json`, `archive.json`, `state.json`, and `resources.json`. No secrets in commits.
