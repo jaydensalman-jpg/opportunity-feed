@@ -15,21 +15,6 @@
     "opens": "2026-08"
   },
   {
-    "id": "bigtech:https://job-boards.greenhouse.io/anthropic/jobs/5023394008",
-    "title": "Anthropic Fellows Program",
-    "company": "Anthropic",
-    "location": "Berkeley, CA / London, UK / Remote (US, UK, CA)",
-    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5023394008",
-    "source": "Big tech sweep",
-    "score": 78,
-    "level": "advanced",
-    "pitch": "Funded 4-month AI safety research fellowship with mentorship — strong AI/ML fit, though full-time and competitive.",
-    "bullet": "Completed a 4-month Anthropic Fellows research project on AI safety, culminating in a public research output.",
-    "deadline": "2026-07-26",
-    "found_at": "2026-07-08T01:16:02+00:00",
-    "opens": "2026-07"
-  },
-  {
     "id": "bigtech:https://deepmind.google/student-researcher-program/",
     "title": "Student Researcher Program",
     "company": "Google DeepMind",
@@ -253,21 +238,6 @@
     "deadline": "unknown",
     "found_at": "2026-07-08T04:21:14+00:00",
     "opens": "2026-09"
-  },
-  {
-    "id": "bigtech:https://www.anthropic.com/claude-corps/fellow",
-    "title": "Claude Corps Fellowship",
-    "company": "Anthropic",
-    "location": "US (placed at nonprofits)",
-    "url": "https://www.anthropic.com/claude-corps/fellow",
-    "source": "Big tech sweep",
-    "score": 74,
-    "level": "open-to-all",
-    "pitch": "$85K 12-month AI-for-good fellowship; Cohort 1 deadline Jul 17(!), later cohorts Jan + Aug 2027 — gap-year option.",
-    "bullet": "Served as a Claude Corps fellow, deploying AI tools inside a mission-driven nonprofit for a year.",
-    "deadline": "2026-07-17",
-    "found_at": "2026-07-08T04:21:14+00:00",
-    "opens": "2026-07"
   },
   {
     "id": "niche:https://codingitforward.com/fellowship",
