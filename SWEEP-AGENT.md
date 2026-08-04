@@ -47,6 +47,7 @@ Jayden's application year is extremely lumpy: almost everything for a summer cyc
 - Add a resource only when a sweep genuinely turns one up, and only after fetching its page. Zero additions is normal and correct.
 - Retire anything confirmed dead to a `note` plus `"verified": false`; if the org itself is gone, remove the entry.
 - Cap at 40 entries. Prefer specific and actionable over comprehensive.
+- **Never let the same `id` or `url` appear in both `results.json` and `resources.json`.** Both use the `<bucket-or-category>:<canonical-url>` scheme and `research:` is a valid prefix in each, so collisions are easy to create by accident. `results.json` wins — it owns the id the dashboard keys saved status to. If a page belongs in both, keep it in `results.json` and leave it out of `resources.json`.
 
 **C. Dated events.** Hackathons, meetups, and workshops with a real date belong in `resources.json` with a concrete `window`. Once the date has passed by more than 3 days, either update it to the next occurrence if one is posted, or remove it. Recurring series (a monthly meetup) keep a rolling `window` describing the cadence plus the next known date.
 

@@ -57,20 +57,6 @@
     "verified": true
   },
   {
-    "id": "research:https://www.cs.washington.edu/academics/undergraduate/research-opportunities/",
-    "title": "Allen School Undergraduate Research",
-    "org": "UW Paul G. Allen School",
-    "category": "research",
-    "url": "https://www.cs.washington.edu/academics/undergraduate/research-opportunities/",
-    "location": "UW Seattle",
-    "cost": "Free",
-    "window": "Rolling — contact labs directly",
-    "why": "Allen School ML/robotics groups take non-CSE undergrads who show up with shipped projects, which you have.",
-    "bullet": "Joined a UW Allen School research group working on machine learning.",
-    "verified_at": "2026-08-01",
-    "verified": true
-  },
-  {
     "id": "community:https://www.meetup.com/seattle-ai-machine-learning-data-science/",
     "title": "Seattle AI, ML & Computer Vision Meetup",
     "org": "Voxel51 / community",
