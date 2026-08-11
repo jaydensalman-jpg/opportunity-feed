@@ -1,0 +1,1008 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Opportunity Tracker</title>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.26.4/babel.min.js"></script>
+  <style>
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #ffffff;
+      color: #000000;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 900px; margin: 0 auto; padding: 40px 20px 80px; }
+
+    button, input, select { font: inherit; color: inherit; }
+    button { cursor: pointer; }
+    button:disabled { cursor: not-allowed; }
+    :focus-visible { outline: 2px solid #000000; outline-offset: 2px; }
+
+    .header {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      flex-wrap: wrap; gap: 8px 16px; margin-bottom: 24px;
+    }
+    h1 { margin: 0; font-size: 24px; font-weight: 600; }
+    .meta { font-size: 12px; font-weight: 400; color: #666666; }
+
+    .text-input {
+      border: 1px solid #eaeaea; border-radius: 8px; background: #ffffff;
+      padding: 8px 12px; font-size: 14px; min-width: 0;
+      transition: border-color 120ms ease;
+    }
+    .text-input::placeholder { color: #666666; opacity: 1; }
+    .text-input:hover { border-color: #999999; }
+    .text-input:focus { outline: none; border-color: #000000; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      border: 1px solid #eaeaea; border-radius: 8px; background: #ffffff; color: #000000;
+      padding: 8px 14px; font-size: 14px; font-weight: 400;
+      text-decoration: none; white-space: nowrap;
+      transition: border-color 120ms ease, background 120ms ease;
+    }
+    .btn:hover:not(:disabled) { border-color: #000000; }
+    .btn:disabled { color: #999999; background: #fafafa; }
+    .btn-primary { background: #000000; border-color: #000000; color: #ffffff; }
+    .btn-primary:hover:not(:disabled) { background: #333333; border-color: #333333; }
+
+    /* Status summary — each card is a toggle that filters the list. */
+    .summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+    .stat {
+      border: 1px solid #eaeaea; border-radius: 8px; padding: 14px 20px; background: #ffffff;
+      text-align: left; transition: border-color 120ms ease, background 120ms ease;
+    }
+    .stat:hover { border-color: #000000; }
+    .stat.active { border-color: #000000; background: #fafafa; }
+    .stat-num { font-size: 24px; font-weight: 600; line-height: 1.2; }
+    .stat-label { font-size: 12px; color: #666666; }
+    .stat-hint { font-size: 11px; color: #999999; }
+
+    /* One toolbar of labeled controls. */
+    .toolbar {
+      display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px 12px;
+      margin-bottom: 8px;
+    }
+    .field { display: flex; flex-direction: column; gap: 4px; }
+    .field-label {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.05em;
+      text-transform: uppercase; color: #666666;
+    }
+    .search-field { flex: 1 1 200px; }
+    .search-field .text-input { width: 100%; }
+    select.text-input {
+      -webkit-appearance: none; appearance: none; cursor: pointer;
+      padding-right: 30px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23666666' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 12px center;
+    }
+
+    .results-row {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 8px; margin: 8px 0 12px;
+    }
+    .clear-btn {
+      border: none; background: none; padding: 0;
+      font-size: 12px; color: #666666; text-decoration: underline;
+    }
+    .clear-btn:hover { color: #000000; }
+
+    .cards { display: flex; flex-direction: column; gap: 12px; }
+    .card {
+      border: 1px solid #eaeaea; border-radius: 8px; padding: 20px; background: #ffffff;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+      transition: border-color 120ms ease, opacity 120ms ease;
+    }
+    .card:hover { border-color: #000000; }
+    .card.applied { opacity: 0.6; }
+    .card.skipped { opacity: 0.4; }
+    .card.skipped .card-title { text-decoration: line-through; }
+
+    .card-top { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 8px 12px; }
+    .card-title { margin: 0; font-size: 16px; font-weight: 600; line-height: 1.4; }
+    .card-actions { display: inline-flex; align-items: center; gap: 8px; flex: none; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      border: 1px solid #eaeaea; border-radius: 999px; padding: 3px 10px;
+      font-size: 12px; font-variant-numeric: tabular-nums; white-space: nowrap;
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+    .status-btn { font-size: 12px; padding: 4px 10px; border-radius: 999px; }
+    .status-btn.is-applied { background: #000000; border-color: #000000; color: #ffffff; }
+    .card-meta { margin-top: 4px; }
+    .pitch { margin: 12px 0 0; font-size: 14px; }
+    .contact-line { margin: 8px 0 0; font-size: 13px; color: #666666; }
+    /* Sweep couldn't load this page to re-verify it — details may be stale. */
+    .badge-warn { border-color: #d97706; color: #b45309; }
+
+    .bullet-toggle {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 12px; padding: 0; border: none; background: none;
+      font-size: 12px; color: #666666;
+    }
+    .bullet-toggle:hover { color: #000000; }
+    .caret { display: inline-block; transition: transform 150ms ease; }
+    .bullet-toggle[aria-expanded="true"] .caret { transform: rotate(90deg); }
+    .bullet-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 150ms ease; }
+    .bullet-body.open { grid-template-rows: 1fr; }
+    .bullet-clip { overflow: hidden; min-height: 0; }
+    .bullet-text { margin: 8px 0 0; padding-left: 12px; border-left: 2px solid #eaeaea; font-size: 14px; }
+
+    .card-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 8px 12px; margin-top: 16px;
+    }
+    .deadline-urgent { color: #dc2626; font-weight: 600; }
+    .deadline-passed { color: #999999; }
+    .deadline-open { color: #16a34a; font-weight: 600; }
+
+    .tabs {
+      display: flex; width: fit-content;
+      border: 1px solid #eaeaea; border-radius: 8px;
+      overflow: hidden; margin-bottom: 20px; max-width: 100%;
+    }
+    .tabs button {
+      border: none; background: #ffffff; color: #666666;
+      padding: 9px 16px; font-size: 13px; white-space: nowrap;
+    }
+    .tabs button + button { border-left: 1px solid #eaeaea; }
+    .tabs button.active { background: #000000; color: #ffffff; }
+    .tabs button:focus-visible { outline-offset: -2px; }
+
+    .notice { border: 1px solid #eaeaea; border-radius: 8px; padding: 48px 20px; text-align: center; }
+    .notice-title { margin: 0 0 4px; font-size: 16px; font-weight: 600; }
+    .notice-body { margin: 0; font-size: 14px; color: #666666; }
+    .notice .btn { margin-top: 16px; }
+
+    .skel { height: 12px; border-radius: 4px; background: #eaeaea; animation: skel-pulse 1.2s ease-in-out infinite; }
+    .skel + .skel { margin-top: 12px; }
+    @keyframes skel-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }
+
+    @media (max-width: 620px) {
+      .page { padding: 24px 16px 64px; }
+      .summary { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+      .stat { padding: 10px 12px; }
+      /* Three tabs no longer fit — let the group scroll rather than the page. */
+      .tabs { width: 100%; overflow-x: auto; }
+      .tabs button { flex: 1 0 auto; padding: 9px 12px; }
+      .search-field { flex-basis: 100%; }
+      .field { flex: 1 1 45%; }
+      .field select.text-input { width: 100%; }
+      .card-top { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel" data-presets="react">
+    const { useState, useEffect, useMemo, useRef } = React;
+
+    const STATUS_NEXT = { new: "applied", applied: "skipped", skipped: "new" };
+    const STATUS_LABEL = { new: "New", applied: "Applied", skipped: "Skipped" };
+    // Resources reuse the same three stored values — you don't "apply" to a
+    // meetup or a competition, so only the wording changes.
+    const RESOURCE_STATUS_LABEL = { new: "To do", applied: "Doing", skipped: "Not for me" };
+    const RESOURCE_SUMMARY_LABEL = { new: "To do", applied: "Doing", skipped: "Not for me" };
+
+    const DEFAULT_FEED_URL =
+      "https://raw.githubusercontent.com/jaydensalman-jpg/opportunity-feed/main/results.json";
+    // Standing resources (research on-ramps, competitions, OSS, communities).
+    // Undated and non-expiring, so they live in their own feed alongside the
+    // dated postings in results.json.
+    const RESOURCES_FEED_URL =
+      "https://raw.githubusercontent.com/jaydensalman-jpg/opportunity-feed/main/resources.json";
+
+    // Applied/Skipped survive refreshes via localStorage, keyed by entry id —
+    // ids are stable across sweeps, so statuses stick to the right opportunity.
+    const STATUS_STORE_KEY = "opportunity-tracker:statuses";
+    // Both feeds build ids as "<bucket-or-category>:<url>" and both can use a
+    // "research:" prefix, so a page listed in each would share one id. Prefix
+    // resource keys so their saved status can never bleed into an opportunity's.
+    const RESOURCE_KEY_PREFIX = "resource::";
+    function loadStoredStatuses() {
+      try {
+        const obj = JSON.parse(localStorage.getItem(STATUS_STORE_KEY) || "{}");
+        if (!obj || typeof obj !== "object" || Array.isArray(obj)) return {};
+        const clean = {};
+        for (const k in obj) {
+          if (obj[k] === "applied" || obj[k] === "skipped") clean[k] = obj[k];
+        }
+        return clean;
+      } catch (e) {
+        return {};
+      }
+    }
+    function saveStoredStatuses(s) {
+      try {
+        localStorage.setItem(STATUS_STORE_KEY, JSON.stringify(s));
+      } catch (e) {
+        // Private browsing or storage disabled — statuses just won't persist.
+      }
+    }
+
+    // Experience level a posting requires. Order = least to most experience;
+    // entries from feeds written before this field exists have no level and
+    // only show under "All".
+    const LEVEL_ORDER = ["open-to-all", "early-undergrad", "competitive", "advanced"];
+    // Short labels for card badges.
+    const LEVEL_LABEL = {
+      "open-to-all": "No experience",
+      "early-undergrad": "1st/2nd years",
+      "competitive": "All undergrads",
+      "advanced": "Stretch",
+    };
+    // Longer labels for the filter dropdown.
+    const LEVEL_FILTER_LABEL = {
+      "open-to-all": "No experience needed",
+      "early-undergrad": "1st & 2nd years — best fit",
+      "competitive": "All undergrads (competitive)",
+      "advanced": "Stretch — research/prior work",
+    };
+    function levelOf(it) {
+      const v = typeof it.level === "string" ? it.level.trim().toLowerCase() : "";
+      return Object.prototype.hasOwnProperty.call(LEVEL_LABEL, v) ? v : null;
+    }
+
+    // Friendly names for the feed's internal sweep buckets; unknown sources
+    // fall back to their raw value.
+    const SOURCE_LABEL = {
+      "Big tech sweep": "Big tech & AI labs",
+      "Niche sweep": "Fellowships & open source",
+      "Research sweep": "Research & REUs",
+      "Startup sweep": "Startups & VC",
+      "Uni sweep": "Seattle & UW",
+    };
+    const sourceLabel = (s) => SOURCE_LABEL[s] || s;
+
+    // "Near me" = Seattle area, Washington state, or fully remote.
+    const NEARBY_RE = /seattle|redmond|bellevue|richland|remote|online|\bUW\b|washington|\bWA\b/i;
+    const isNearby = (it) => typeof it.location === "string" && NEARBY_RE.test(it.location);
+
+    // Resource categories, ordered by how much they move the needle on a
+    // sophomore's profile rather than alphabetically.
+    const CATEGORY_ORDER = ["research", "compete", "oss", "community"];
+    const CATEGORY_LABEL = {
+      research: "Research",
+      compete: "Competitions",
+      oss: "Open source",
+      community: "Community",
+    };
+    const CATEGORY_FILTER_LABEL = {
+      research: "Research — labs & on-ramps",
+      compete: "Competitions & hackathons",
+      oss: "Open source contributions",
+      community: "Communities & meetups",
+    };
+    function categoryOf(it) {
+      const v = typeof it.category === "string" ? it.category.trim().toLowerCase() : "";
+      return Object.prototype.hasOwnProperty.call(CATEGORY_LABEL, v) ? v : null;
+    }
+
+    // "Best shots" = programs built for 1st/2nd-years, plus no-prerequisite
+    // picks with a solid fit score — the applications most likely to land.
+    function isBestShot(it) {
+      const lvl = levelOf(it);
+      const sc = numScore(it.score) ?? 0;
+      return lvl === "early-undergrad" || (lvl === "open-to-all" && sc >= 70);
+    }
+
+    // Missing/empty field -> em dash, and always a string so React never
+    // chokes on a malformed feed value.
+    function text(v) {
+      if (v === null || v === undefined) return "—";
+      const s = String(v).trim();
+      return s === "" ? "—" : s;
+    }
+
+    const DAY_MS = 86400000;
+    // Date-only strings are parsed as LOCAL midnight so "2026-07-17" doesn't
+    // display as Jul 16 in US timezones. Returns null for unknown/invalid.
+    function parseDeadline(d) {
+      if (typeof d !== "string") return null;
+      const s = d.trim();
+      if (s === "" || s.toLowerCase() === "unknown") return null;
+      const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s);
+      if (m) return new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3])).getTime();
+      const t = Date.parse(s);
+      return isNaN(t) ? null : t;
+    }
+    // Sort key: unknown deadlines sink to the bottom.
+    function deadlineTime(d) {
+      const t = parseDeadline(d);
+      return t === null ? Infinity : t;
+    }
+    // "opens" is a YYYY-MM month when applications are expected to open.
+    function parseOpens(o) {
+      if (typeof o !== "string") return null;
+      const m = /^(\d{4})-(\d{2})$/.exec(o.trim());
+      if (!m) return null;
+      return new Date(Number(m[1]), Number(m[2]) - 1, 1).getTime();
+    }
+
+    // One timeline line per opportunity, plus how it sorts under "Due date":
+    // rank 0 = posted deadline (soonest first), 1 = open now (rolling),
+    // 2 = window opens later (soonest first), 3 = passed or unknown.
+    function scheduleInfo(it) {
+      const t = parseDeadline(it.deadline);
+      if (t !== null) {
+        const date = new Date(t).toLocaleDateString("en-US", {
+          month: "short", day: "numeric", year: "numeric",
+        });
+        const days = Math.ceil((t - Date.now()) / DAY_MS);
+        if (days < 0) return { label: "Deadline: " + date + " — passed", cls: "deadline-passed", rank: 3, key: t };
+        if (days === 0) return { label: "Deadline: " + date + " — due today", cls: "deadline-urgent", rank: 0, key: t };
+        if (days <= 14) {
+          return {
+            label: "Deadline: " + date + " — " + days + (days === 1 ? " day left" : " days left"),
+            cls: "deadline-urgent", rank: 0, key: t,
+          };
+        }
+        return { label: "Deadline: " + date, cls: "", rank: 0, key: t };
+      }
+      const o = parseOpens(it.opens);
+      if (o !== null) {
+        if (o <= Date.now()) return { label: "Open now — rolling applications", cls: "deadline-open", rank: 1, key: o };
+        const month = new Date(o).toLocaleDateString("en-US", { month: "long", year: "numeric" });
+        return { label: "Applications expected to open " + month, cls: "", rank: 2, key: o };
+      }
+      return { label: "Deadline: none posted yet", cls: "", rank: 3, key: Infinity };
+    }
+
+    function numScore(v) {
+      if (typeof v === "number" && isFinite(v)) return v;
+      if (typeof v === "string" && v.trim() !== "" && isFinite(Number(v))) return Number(v);
+      return null;
+    }
+
+    function dotColor(score) {
+      if (score === null) return "#999999";
+      if (score >= 80) return "#16a34a";
+      if (score >= 65) return "#d97706";
+      return "#999999";
+    }
+
+    function keyOf(it, i) {
+      const id = it.id;
+      if (typeof id === "string" && id.trim() !== "") return id;
+      if (typeof id === "number" && isFinite(id)) return String(id);
+      return "row-" + i;
+    }
+
+    // Storage/React key. Resource ids live in their own namespace so a page
+    // present in both feeds can't share one saved status.
+    function statusKeyOf(it, i, isResource) {
+      return (isResource ? RESOURCE_KEY_PREFIX : "") + keyOf(it, i);
+    }
+
+    function SkeletonList() {
+      return (
+        <div className="cards" aria-hidden="true">
+          {[0, 1, 2].map((i) => (
+            <div className="card" key={i}>
+              <div className="skel" style={{ width: "45%" }}></div>
+              <div className="skel" style={{ width: "30%" }}></div>
+              <div className="skel" style={{ width: "90%" }}></div>
+              <div className="skel" style={{ width: "20%" }}></div>
+            </div>
+          ))}
+        </div>
+      );
+    }
+
+    function OpportunityCard({ it, status, expanded, onCycle, onToggle }) {
+      const score = numScore(it.score);
+      const lvl = levelOf(it);
+      const src = sourceLabel(String(it.source ?? "").trim());
+      const metaLine = [text(it.company), text(it.location), src === "" ? "—" : src].join(" · ");
+      const dl = scheduleInfo(it);
+      const href =
+        typeof it.url === "string" && /^https?:\/\//i.test(it.url.trim()) ? it.url.trim() : null;
+      return (
+        <article
+          className={
+            "card" + (status === "applied" ? " applied" : "") + (status === "skipped" ? " skipped" : "")
+          }
+        >
+          <div className="card-top">
+            <h2 className="card-title">{text(it.title)}</h2>
+            <div className="card-actions">
+              {lvl && (
+                <span className="badge" title="Experience level required">
+                  {LEVEL_LABEL[lvl]}
+                </span>
+              )}
+              <span className="badge" title="Fit score">
+                <span className="dot" style={{ background: dotColor(score) }}></span>
+                {score === null ? "—" : score}
+              </span>
+              <button
+                type="button"
+                className={"btn status-btn" + (status === "applied" ? " is-applied" : "")}
+                onClick={onCycle}
+                aria-label={"Status: " + STATUS_LABEL[status] + ". Click to change."}
+              >
+                {STATUS_LABEL[status]}
+              </button>
+            </div>
+          </div>
+          <div className="meta card-meta">{metaLine}</div>
+          <p className="pitch">{text(it.pitch)}</p>
+          <button type="button" className="bullet-toggle" aria-expanded={expanded} onClick={onToggle}>
+            Resume bullet <span className="caret" aria-hidden="true">▸</span>
+          </button>
+          <div className={"bullet-body" + (expanded ? " open" : "")}>
+            <div className="bullet-clip">
+              <p className="bullet-text">{text(it.bullet)}</p>
+            </div>
+          </div>
+          <div className="card-bottom">
+            <span className={"meta " + dl.cls}>{dl.label}</span>
+            {href ? (
+              <a className="btn btn-primary" href={href} target="_blank" rel="noopener noreferrer">
+                Apply ↗
+              </a>
+            ) : (
+              <button type="button" className="btn" disabled title="No application link in the feed">
+                Apply ↗
+              </button>
+            )}
+          </div>
+        </article>
+      );
+    }
+
+    function ResourceCard({ it, status, expanded, onCycle, onToggle }) {
+      const cat = categoryOf(it);
+      const metaLine = [text(it.org), text(it.location), text(it.cost)].join(" · ");
+      const href =
+        typeof it.url === "string" && /^https?:\/\//i.test(it.url.trim()) ? it.url.trim() : null;
+      const bullet = typeof it.bullet === "string" ? it.bullet.trim() : "";
+      const contact = typeof it.contact === "string" ? it.contact.trim() : "";
+      // The sweep marks an entry unverified when its page blocked or rendered
+      // empty to an automated fetch. Surfaced so a stale detail isn't trusted.
+      const unverified = it.verified === false;
+      return (
+        <article
+          className={
+            "card" + (status === "applied" ? " applied" : "") + (status === "skipped" ? " skipped" : "")
+          }
+        >
+          <div className="card-top">
+            <h2 className="card-title">{text(it.title)}</h2>
+            <div className="card-actions">
+              {cat && (
+                <span className="badge" title="Resource type">
+                  {CATEGORY_LABEL[cat]}
+                </span>
+              )}
+              {unverified && (
+                <span className="badge badge-warn" title={text(it.note)}>
+                  Unconfirmed
+                </span>
+              )}
+              <button
+                type="button"
+                className={"btn status-btn" + (status === "applied" ? " is-applied" : "")}
+                onClick={onCycle}
+                aria-label={"Status: " + RESOURCE_STATUS_LABEL[status] + ". Click to change."}
+              >
+                {RESOURCE_STATUS_LABEL[status]}
+              </button>
+            </div>
+          </div>
+          <div className="meta card-meta">{metaLine}</div>
+          <p className="pitch">{text(it.why)}</p>
+          {contact !== "" && <p className="contact-line">Contact: {contact}</p>}
+          {bullet !== "" && (
+            <React.Fragment>
+              <button type="button" className="bullet-toggle" aria-expanded={expanded} onClick={onToggle}>
+                Resume bullet <span className="caret" aria-hidden="true">▸</span>
+              </button>
+              <div className={"bullet-body" + (expanded ? " open" : "")}>
+                <div className="bullet-clip">
+                  <p className="bullet-text">{bullet}</p>
+                </div>
+              </div>
+            </React.Fragment>
+          )}
+          <div className="card-bottom">
+            <span className="meta">{text(it.window)}</span>
+            {href ? (
+              <a className="btn btn-primary" href={href} target="_blank" rel="noopener noreferrer">
+                Open ↗
+              </a>
+            ) : (
+              <button type="button" className="btn" disabled title="No link in the feed">
+                Open ↗
+              </button>
+            )}
+          </div>
+        </article>
+      );
+    }
+
+    function App() {
+      const [items, setItems] = useState(null); // null = nothing loaded yet
+      const [resources, setResources] = useState([]);
+      const [loading, setLoading] = useState(false);
+      const [error, setError] = useState(null);
+      const [statuses, setStatuses] = useState(loadStoredStatuses); // key -> "applied" | "skipped"
+      const [expanded, setExpanded] = useState({});
+      const [query, setQuery] = useState("");
+      const [minScore, setMinScore] = useState(0);
+      const [source, setSource] = useState("All");
+      const [level, setLevel] = useState("All");
+      const [nearby, setNearby] = useState(false); // Seattle-area/remote only
+      const [statusFilter, setStatusFilter] = useState("all"); // "all" | "new" | "applied" | "skipped"
+      const [view, setView] = useState("all"); // "all" | "best" | "resources"
+      const [sortBy, setSortBy] = useState("score"); // "score" | "deadline"
+      const [category, setCategory] = useState("All"); // resources view only
+      const seq = useRef(0); // ignores responses from superseded loads
+
+      const load = async () => {
+        if (loading) return;
+        const id = ++seq.current;
+        setLoading(true);
+        setError(null);
+
+        // Resources are a bonus feed — a miss there shouldn't blank the
+        // opportunities, so it settles separately and falls back to empty.
+        const resourcesPromise = fetch(RESOURCES_FEED_URL)
+          .then((res) => (res.ok ? res.json() : []))
+          .then((data) => (Array.isArray(data) ? data : []))
+          .catch(() => []);
+
+        try {
+          const res = await fetch(DEFAULT_FEED_URL);
+          if (!res.ok) throw new Error("Request failed with HTTP " + res.status + ".");
+          const data = await res.json();
+          if (!Array.isArray(data)) throw new Error("The URL returned valid JSON, but not a JSON array.");
+          const resData = await resourcesPromise;
+          if (id !== seq.current) return;
+          setItems(data.filter((x) => x && typeof x === "object" && !Array.isArray(x)));
+          setResources(resData.filter((x) => x && typeof x === "object" && !Array.isArray(x)));
+        } catch (err) {
+          if (id !== seq.current) return;
+          setError(err && err.message ? err.message : "Failed to load the feed.");
+        } finally {
+          if (id === seq.current) setLoading(false);
+        }
+      };
+
+      // Auto-load the default feed on open so the day's list is zero-click.
+      useEffect(() => {
+        load();
+      }, []);
+
+      const isResourceView = view === "resources";
+      // Active dataset — every count, filter, and card below reads from this
+      // rather than from `items`, so the two feeds share one set of controls.
+      const dataset = isResourceView ? resources : items || [];
+
+      const cycleStatus = (key) =>
+        setStatuses((s) => {
+          const next = { ...s, [key]: STATUS_NEXT[s[key] || "new"] };
+          if (next[key] === "new") delete next[key]; // cycling back to New clears the stored entry
+          saveStoredStatuses(next);
+          return next;
+        });
+      const toggleExpand = (key) => setExpanded((e) => ({ ...e, [key]: !e[key] }));
+      const clearFilters = () => {
+        setQuery("");
+        setMinScore(0);
+        setSource("All");
+        setLevel("All");
+        setCategory("All");
+        setNearby(false);
+        setStatusFilter("all");
+      };
+
+      const sources = useMemo(() => {
+        const set = new Set();
+        (items || []).forEach((it) => {
+          if (typeof it.source === "string" && it.source.trim() !== "") set.add(it.source.trim());
+        });
+        return Array.from(set).sort();
+      }, [items]);
+
+      // If a reload drops the selected source, fall back to All.
+      const sourceValue = source === "All" || sources.includes(source) ? source : "All";
+
+      const levels = useMemo(
+        () => LEVEL_ORDER.filter((l) => (items || []).some((it) => levelOf(it) === l)),
+        [items]
+      );
+      const levelValue = level === "All" || levels.includes(level) ? level : "All";
+
+      // Dropdown counts, computed over the whole feed so they stay stable while filtering.
+      const levelCounts = useMemo(() => {
+        const c = {};
+        (items || []).forEach((it) => {
+          const l = levelOf(it);
+          if (l) c[l] = (c[l] || 0) + 1;
+        });
+        return c;
+      }, [items]);
+      const sourceCounts = useMemo(() => {
+        const c = {};
+        (items || []).forEach((it) => {
+          const s = typeof it.source === "string" ? it.source.trim() : "";
+          if (s) c[s] = (c[s] || 0) + 1;
+        });
+        return c;
+      }, [items]);
+      const nearbyCount = useMemo(() => dataset.filter(isNearby).length, [dataset]);
+      const bestCount = useMemo(() => (items || []).filter(isBestShot).length, [items]);
+
+      const categories = useMemo(
+        () => CATEGORY_ORDER.filter((c) => resources.some((it) => categoryOf(it) === c)),
+        [resources]
+      );
+      const categoryValue = category === "All" || categories.includes(category) ? category : "All";
+      const categoryCounts = useMemo(() => {
+        const c = {};
+        resources.forEach((it) => {
+          const k = categoryOf(it);
+          if (k) c[k] = (c[k] || 0) + 1;
+        });
+        return c;
+      }, [resources]);
+
+      const feedUpdated = useMemo(() => {
+        let max = 0;
+        (items || []).forEach((it) => {
+          const t = Date.parse(String(it.found_at ?? ""));
+          if (!isNaN(t) && t > max) max = t;
+        });
+        return max
+          ? new Date(max).toLocaleDateString("en-US", { month: "short", day: "numeric" })
+          : null;
+      }, [items]);
+
+      const filtersActive =
+        query.trim() !== "" ||
+        nearby ||
+        statusFilter !== "all" ||
+        (isResourceView
+          ? categoryValue !== "All"
+          : minScore > 0 || sourceValue !== "All" || levelValue !== "All");
+
+      const visible = useMemo(() => {
+        const q = query.trim().toLowerCase();
+        const rows = dataset.map((it, i) => ({ it, key: statusKeyOf(it, i, isResourceView) }));
+        const filtered = rows.filter(({ it, key }) => {
+          if (view === "best" && !isBestShot(it)) return false;
+          if (q !== "") {
+            // Opportunities carry a company; resources carry an org.
+            const hay = (
+              String(it.title ?? "") + " " + String(it.company ?? "") + " " + String(it.org ?? "")
+            ).toLowerCase();
+            if (!hay.includes(q)) return false;
+          }
+          if (nearby && !isNearby(it)) return false;
+          if (statusFilter !== "all" && (statuses[key] || "new") !== statusFilter) return false;
+          if (isResourceView) {
+            if (categoryValue !== "All" && categoryOf(it) !== categoryValue) return false;
+            return true;
+          }
+          if ((numScore(it.score) ?? 0) < minScore) return false;
+          if (sourceValue !== "All" && String(it.source ?? "").trim() !== sourceValue) return false;
+          if (levelValue !== "All" && levelOf(it) !== levelValue) return false;
+          return true;
+        });
+        if (isResourceView) {
+          // No score to rank by, so group by category in profile-impact order
+          // and keep the feed's own order inside each group.
+          filtered.sort(
+            (a, b) =>
+              CATEGORY_ORDER.indexOf(categoryOf(a.it)) - CATEGORY_ORDER.indexOf(categoryOf(b.it))
+          );
+          return filtered;
+        }
+        const scoreDesc = (a, b) =>
+          (numScore(b.it.score) ?? -1) - (numScore(a.it.score) ?? -1);
+        filtered.sort((a, b) => {
+          if (sortBy === "deadline") {
+            const sa = scheduleInfo(a.it);
+            const sb = scheduleInfo(b.it);
+            if (sa.rank !== sb.rank) return sa.rank - sb.rank;
+            if (sa.key !== sb.key) return sa.key - sb.key;
+          }
+          return scoreDesc(a, b);
+        });
+        return filtered;
+      }, [
+        dataset, isResourceView, query, minScore, sourceValue, levelValue,
+        categoryValue, nearby, statusFilter, statuses, view, sortBy,
+      ]);
+
+      const counts = useMemo(() => {
+        const c = { new: 0, applied: 0, skipped: 0 };
+        dataset.forEach((it, i) => {
+          c[statuses[statusKeyOf(it, i, isResourceView)] || "new"] += 1;
+        });
+        return c;
+      }, [dataset, isResourceView, statuses]);
+
+      const subtitle = loading
+        ? "Loading feed…"
+        : error
+        ? "Feed unavailable"
+        : items === null
+        ? "No feed loaded"
+        : items.length +
+          " opportunities · " +
+          resources.length +
+          " resources" +
+          (feedUpdated ? " · feed updated " + feedUpdated : "");
+
+      let content;
+      if (loading) {
+        content = <SkeletonList />;
+      } else if (error) {
+        content = (
+          <div className="notice" role="alert">
+            <p className="notice-title">Couldn't load the feed</p>
+            <p className="notice-body">{error}</p>
+            <button type="button" className="btn" onClick={load}>Retry</button>
+          </div>
+        );
+      } else if (items === null) {
+        content = (
+          <div className="notice">
+            <p className="notice-title">No feed loaded</p>
+            <p className="notice-body">Press Refresh (top right) to load the feed.</p>
+          </div>
+        );
+      } else if (dataset.length === 0) {
+        content = (
+          <div className="notice">
+            <p className="notice-title">{isResourceView ? "No resources yet" : "Feed is empty"}</p>
+            <p className="notice-body">
+              {isResourceView
+                ? "The daily sweep hasn't published any standing resources yet, or resources.json couldn't be reached."
+                : "The feed loaded fine — there are just no opportunities in it yet."}
+            </p>
+          </div>
+        );
+      } else if (visible.length === 0) {
+        content = (
+          <div className="notice">
+            <p className="notice-title">No matches</p>
+            <p className="notice-body">Nothing matches the current filters.</p>
+            <button type="button" className="btn" onClick={clearFilters}>Clear filters</button>
+          </div>
+        );
+      } else {
+        content = (
+          <div className="cards">
+            {visible.map(({ it, key }) =>
+              isResourceView ? (
+                <ResourceCard
+                  key={key}
+                  it={it}
+                  status={statuses[key] || "new"}
+                  expanded={!!expanded[key]}
+                  onCycle={() => cycleStatus(key)}
+                  onToggle={() => toggleExpand(key)}
+                />
+              ) : (
+                <OpportunityCard
+                  key={key}
+                  it={it}
+                  status={statuses[key] || "new"}
+                  expanded={!!expanded[key]}
+                  onCycle={() => cycleStatus(key)}
+                  onToggle={() => toggleExpand(key)}
+                />
+              )
+            )}
+          </div>
+        );
+      }
+
+      const statCard = (statusKey) => {
+        const label = isResourceView
+          ? RESOURCE_SUMMARY_LABEL[statusKey]
+          : STATUS_LABEL[statusKey];
+        return (
+          <button
+            type="button"
+            className={"stat" + (statusFilter === statusKey ? " active" : "")}
+            onClick={() => setStatusFilter(statusFilter === statusKey ? "all" : statusKey)}
+            aria-pressed={statusFilter === statusKey}
+            title={"Show only " + label.toLowerCase()}
+          >
+            <div className="stat-num">{counts[statusKey]}</div>
+            <div className="stat-label">{label}</div>
+            <div className="stat-hint">{statusFilter === statusKey ? "showing only these" : "click to filter"}</div>
+          </button>
+        );
+      };
+
+      return (
+        <div className="page">
+          <header className="header">
+            <div>
+              <h1>Opportunity Tracker</h1>
+              <div className="meta">{subtitle}</div>
+            </div>
+            <button type="button" className="btn" onClick={load} disabled={loading}>
+              {loading ? "Refreshing…" : "Refresh"}
+            </button>
+          </header>
+
+          <div className="summary">
+            {statCard("new")}
+            {statCard("applied")}
+            {statCard("skipped")}
+          </div>
+
+          <div className="tabs" role="group" aria-label="View">
+            <button
+              type="button"
+              className={view === "all" ? "active" : ""}
+              aria-pressed={view === "all"}
+              onClick={() => setView("all")}
+            >
+              {"All opportunities" + (items ? " (" + items.length + ")" : "")}
+            </button>
+            <button
+              type="button"
+              className={view === "best" ? "active" : ""}
+              aria-pressed={view === "best"}
+              onClick={() => setView("best")}
+            >
+              {"Best shots for you" + (items ? " (" + bestCount + ")" : "")}
+            </button>
+            <button
+              type="button"
+              className={view === "resources" ? "active" : ""}
+              aria-pressed={view === "resources"}
+              onClick={() => setView("resources")}
+            >
+              {"Resources" + (items ? " (" + resources.length + ")" : "")}
+            </button>
+          </div>
+
+          <div className="toolbar">
+            <div className="field search-field">
+              <label className="field-label" htmlFor="f-search">Search</label>
+              <input
+                id="f-search"
+                type="text"
+                className="text-input"
+                placeholder="Title or company"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+              />
+            </div>
+            {isResourceView ? (
+              <div className="field">
+                <label className="field-label" htmlFor="f-category">Type</label>
+                <select
+                  id="f-category"
+                  className="text-input"
+                  value={categoryValue}
+                  onChange={(e) => setCategory(e.target.value)}
+                >
+                  <option value="All">All types</option>
+                  {categories.map((c) => (
+                    <option key={c} value={c}>
+                      {CATEGORY_FILTER_LABEL[c] + " (" + (categoryCounts[c] || 0) + ")"}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            ) : (
+              <React.Fragment>
+                <div className="field">
+                  <label className="field-label" htmlFor="f-level">Experience</label>
+                  <select
+                    id="f-level"
+                    className="text-input"
+                    value={levelValue}
+                    onChange={(e) => setLevel(e.target.value)}
+                  >
+                    <option value="All">All levels</option>
+                    {levels.map((l) => (
+                      <option key={l} value={l}>
+                        {LEVEL_FILTER_LABEL[l] + " (" + (levelCounts[l] || 0) + ")"}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="field">
+                  <label className="field-label" htmlFor="f-source">Category</label>
+                  <select
+                    id="f-source"
+                    className="text-input"
+                    value={sourceValue}
+                    onChange={(e) => setSource(e.target.value)}
+                  >
+                    <option value="All">All categories</option>
+                    {sources.map((s) => (
+                      <option key={s} value={s}>
+                        {sourceLabel(s) + " (" + (sourceCounts[s] || 0) + ")"}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </React.Fragment>
+            )}
+            <div className="field">
+              <label className="field-label" htmlFor="f-location">Location</label>
+              <select
+                id="f-location"
+                className="text-input"
+                value={nearby ? "nearby" : "all"}
+                onChange={(e) => setNearby(e.target.value === "nearby")}
+              >
+                <option value="all">Anywhere</option>
+                <option value="nearby">{"Seattle area & remote (" + nearbyCount + ")"}</option>
+              </select>
+            </div>
+            {!isResourceView && (
+              <React.Fragment>
+                <div className="field">
+                  <label className="field-label" htmlFor="f-fit">Fit</label>
+                  <select
+                    id="f-fit"
+                    className="text-input"
+                    value={String(minScore)}
+                    onChange={(e) => setMinScore(Number(e.target.value))}
+                  >
+                    <option value="0">Any score</option>
+                    <option value="65">Good fit (65+)</option>
+                    <option value="80">Strong fit (80+)</option>
+                  </select>
+                </div>
+                <div className="field">
+                  <label className="field-label" htmlFor="f-sort">Sort</label>
+                  <select
+                    id="f-sort"
+                    className="text-input"
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                  >
+                    <option value="score">Best fit first</option>
+                    <option value="deadline">Deadline soonest</option>
+                  </select>
+                </div>
+              </React.Fragment>
+            )}
+          </div>
+
+          <div className="results-row">
+            <span className="meta">
+              {items === null ? "" : visible.length + " of " + dataset.length + " showing"}
+              {view === "best" &&
+                " — programs built for your class year, plus no-prerequisite picks that fit your profile"}
+              {isResourceView &&
+                " — standing resources that don't expire, so there's something to do while applications are closed"}
+            </span>
+            {filtersActive && (
+              <button type="button" className="clear-btn" onClick={clearFilters}>
+                Clear all filters
+              </button>
+            )}
+          </div>
+
+          {content}
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>
