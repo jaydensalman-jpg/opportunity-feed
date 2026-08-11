@@ -1,16 +1,16 @@
 [
   {
-    "id": "compete:https://ghw.mlh.com/events/generative-ai",
-    "title": "Global Hack Week: Agents",
+    "id": "compete:https://ghw.mlh.com/",
+    "title": "MLH Global Hack Week",
     "org": "Major League Hacking",
     "category": "compete",
-    "url": "https://ghw.mlh.com/events/generative-ai",
+    "url": "https://ghw.mlh.com/",
     "location": "Online",
     "cost": "Free",
-    "window": "2026-08-07 to 2026-08-13",
-    "why": "Agent-building week lands 6 days out and maps directly onto your SpeakCoach/Husky Planner LLM work.",
+    "window": "Agents 2026-08-07 to 08-13 (running now); Data Week 2026-09-11 to 09-17; Hacktoberfest 2026-10-09 to 10-15",
+    "why": "Free week-long online build sprints; the Agents week maps straight onto your SpeakCoach/Husky Planner LLM work.",
     "bullet": "Shipped an AI agent during MLH Global Hack Week, an international online build sprint.",
-    "verified_at": "2026-08-01",
+    "verified_at": "2026-08-11",
     "verified": true
   },
   {
@@ -21,10 +21,10 @@
     "url": "https://dh26.dubhacks.co/",
     "location": "UW Seattle",
     "cost": "Free",
-    "window": "2026-10-17 to 2026-10-18; applications open Sept 2026",
+    "window": "2026-10-17 to 2026-10-18 at UW Seattle; registration not yet posted on the site",
     "why": "Largest collegiate hackathon in the PNW (1,000+ students, ~100 industry mentors) on your own campus.",
     "bullet": "Built and demoed an AI project at DubHacks, the Pacific Northwest's largest collegiate hackathon.",
-    "verified_at": "2026-08-01",
+    "verified_at": "2026-08-11",
     "verified": true
   },
   {
@@ -78,12 +78,11 @@
     "url": "https://seattle.aitinkerers.org/",
     "location": "Seattle",
     "cost": "Free",
-    "window": "Roughly monthly; ~3hr format with live demos",
-    "why": "Demo-driven builder meetup — you have three shippable demos already, which is the entry ticket to being known here.",
+    "window": "Roughly weekly this month: AI x Bio Demo Night w/ NVIDIA + Ai2 on 2026-08-11; Women in AI Builders 2026-08-18; August Demo Night w/ NVIDIA 2026-08-19; AI Dev Tools 2026-09-08",
+    "why": "Demo-driven builder meetup, and the Aug 11 night puts Allen Institute for AI people in the room — the lab you already have flagged as a research target.",
     "bullet": "Demoed an in-browser Whisper speech-coaching app at AI Tinkerers Seattle.",
-    "verified_at": "2026-08-01",
-    "verified": false,
-    "note": "Site returned 403 to automated fetch; existence and format confirmed via search results, not a direct page load."
+    "verified_at": "2026-08-11",
+    "verified": true
   },
   {
     "id": "community:https://www.meetup.com/pydata_seattle/",
@@ -171,9 +170,9 @@
     "window": "Rolling",
     "why": "A merged PR into scikit-learn is a stronger ML signal than most internships, and it's the standard on-ramp repo.",
     "bullet": "Contributed merged code to scikit-learn, a core open-source machine learning library.",
-    "verified_at": "2026-08-01",
+    "verified_at": "2026-08-11",
     "verified": false,
-    "note": "Repo and label convention are well established; specific issue list not fetched this run."
+    "note": "Re-checked 2026-08-11: GitHub label page returned 'There was an error while loading' to automated fetch; issue list not confirmed."
   },
   {
     "id": "oss:https://cohere.com/research/open-science",
