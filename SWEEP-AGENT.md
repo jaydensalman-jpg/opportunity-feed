@@ -78,6 +78,32 @@ Categories, and what each is for:
 - `oss` — open-source contribution paths; a merged PR into a core ML library outranks most listings
 - `community` — Seattle and UW rooms worth being in, weighted toward ones that meet regularly
 
+## Fetching and verification toolkit
+
+Career pages are the worst-behaved pages on the web. Most big-company listings are JavaScript shells that return an empty page or a bare `<title>` to a plain fetch, and several 403 automated requests outright. **A failed fetch is not evidence a program is closed** — it is almost always the wrong door. Work this list before concluding anything, and never downgrade to "I found it in a search snippet."
+
+**1. Go straight to the company's applicant tracking system.** These are public JSON endpoints, they are the company's own source of truth, and they are far more reliable than the rendered careers page:
+
+| ATS | Endpoint | Notes |
+|---|---|---|
+| Greenhouse | `https://boards-api.greenhouse.io/v1/boards/<company>/jobs` | Company slug is usually the lowercase name (`databricks`, `andurilindustries`). Individual postings render at `https://job-boards.greenhouse.io/<company>/jobs/<id>` and usually fetch fine. |
+| Lever | `https://api.lever.co/v0/postings/<company>?mode=json` | Returns `text`, `categories.location`, `hostedUrl`, `createdAt`. Do **not** add query filters — unknown params silently return `[]`. |
+| Amazon | `https://www.amazon.jobs/en/search.json?base_query=<q>&country=USA&result_limit=50&sort=recent` | The only reliable way to search amazon.jobs; the HTML search page returns nothing. |
+| Workday | `https://<tenant>.wdN.myworkdayjobs.com/wday/cxs/<tenant>/<site>/jobs` (POST) | Fiddly; usually faster to load the posting in the browser pane. |
+| Ashby | `https://api.ashbyhq.com/posting-api/job-board/<company>` | Used by OpenAI, Deepgram, and much of the AI-startup world. |
+
+**2. Fall back to the browser pane.** `preview_start` with `{url}`, then read the page. Pages that 403 a plain fetch — `jobs.lever.co` postings are the standing example — load normally in the browser. Two gotchas learned the hard way:
+- `read_page` returns empty on some sites. Use `javascript_tool` with `document.querySelector('main').innerText` instead, and resize the window first if the viewport reports 0×0.
+- Cross-origin `fetch` from the browser is CORS-blocked. Navigate to the company's own origin first, *then* fetch its ATS API from that page — same-origin requests go through.
+
+**3. Only then, search.** Use search to discover *which* company or program to check, then verify on the company's own page or ATS. Aggregators and "internship guide" blogs are lead sources, never evidence; their dates are frequently projections presented as fact.
+
+**4. Record what actually happened.** If every door fails, that candidate is rejected with a one-line reason, or — for `resources.json` — kept with `"verified": false` and a note naming the failure mode. Never write a `deadline`, an eligibility rule, or a `verified: true` that you did not read off a page you loaded.
+
+### Standing daily pulse
+
+Because this runs daily, the cheapest high-value check is polling the ATS of companies already on the watchlist rather than re-searching the open web for them. Postings often go live days before anyone writes about them, and rolling-review programs reward being early by a lot. Prioritize, in Aug–Oct especially: Palantir (Lever), Databricks / Anduril / Roblox / Figma / Scale / Ramp (Greenhouse), Amazon (`search.json`), OpenAI and AI-startups (Ashby), Microsoft / NVIDIA / Uber / Salesforce (Workday or browser pane).
+
 ## Entry schema — every field, exactly this shape
 
 ```json
@@ -127,12 +153,12 @@ Programs verified as real (July 2026) whose next cycle hasn't opened yet, with t
 
 | Program | Where to check | Expected window |
 |---|---|---|
-| Amazon SDE Intern Summer 2027 | amazon.jobs (search "SDE intern 2027") | late Jul–Sep 2026 |
+| Amazon SDE Intern Summer 2027 | amazon.jobs `search.json` | late Jul–Sep 2026. As of 2026-08-11 the Summer 2027 reqs have started landing (ops/Area Manager, posted Aug 5–6) but no SDE yet — check daily. |
 | Amazon Propel (early-ID) | amazon.jobs | Aug–Oct 2026 |
-| Palantir Path posting | palantir.com/careers/open-positions | opens Aug, deadline ~early Oct 2026 |
+| ~~Palantir Path~~ → standard internships | Lever API (see toolkit) | **OPEN since 2026-07-01**, gated to 2028 grads. Path track retired — as of Aug 2026 the student page lists only New Grad, Internships, and a HS-senior Meritocracy Fellowship. |
 | Duolingo Thrive postings | careers.duolingo.com | Aug–Sep 2026 |
 | Cohere Labs Scholars | cohere.com/research/scholars-program | opens ~Aug 2026 (Jan 2027 start) |
-| Outreachy Dec 2026 cohort | outreachy.org | initial apps ~Aug 2026 |
+| Outreachy Dec 2026 cohort | outreachy.org | initial apps open **late Aug**, due **early Sept 2026** (~2-week window; essays take real time) |
 | Google ASDI posting | google.com/about/careers (search "ASDI") | Sep–Nov 2026, 2–4 wk window |
 | Uber STAR posting | jobs.uber.com | Sep–Oct 2026 |
 | Stripe / Roblox / Salesforce Futureforce intern postings | company careers pages | Sep–Oct 2026 |
