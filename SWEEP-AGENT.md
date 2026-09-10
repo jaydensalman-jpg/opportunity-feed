@@ -24,6 +24,7 @@ You are running inside a checkout of my `opportunity-feed` git repo. All paths a
    - `uni` — UW/iSchool-relevant lists, Seattle-area orgs, curated GitHub internship lists (e.g., the Simplify/pittcsc summer internships repo)
 3. **Search.** Run 8–12 varied web searches for that bucket. Mix evergreen queries ("machine learning internship application open") with dated ones built from today's date ("AI fellowship apply 2027"). Prefer original posting pages over aggregators.
    Then do the **watchlist pass**: from the Watchlist section below, pick every program whose expected window is open, opening within ~30 days, or recently passed (up to 6 per sweep; nearest-window first). Search/fetch each one. If it has opened: add it (or, if an entry with that program already exists under a hub URL, update that entry in place — keep its `id`, refresh `url` only if the hub URL was a placeholder for a now-live posting page, and fill the real `deadline`). If its cycle closed, archive any stale entry.
+3b. **Run the freshness pass** (see "Freshness — re-verify, don't just accumulate"). Re-check what is already in the feed *before* hunting for new entries, and apply the catch-up rule if the feed has gone stale.
 4. **Verify every candidate.** Fetch the actual posting page. Only keep it if the page loads, the program is real, and applications are open (or opening soon with a stated date). If a page won't load or is paywalled, reject it — never guess.
 5. **Write entries** (schema below), score them, and append to `results.json`.
 6. **Maintain the feed:**
@@ -78,6 +79,24 @@ Categories, and what each is for:
 - `oss` — open-source contribution paths; a merged PR into a core ML library outranks most listings
 - `community` — Seattle and UW rooms worth being in, weighted toward ones that meet regularly
 
+## Freshness — re-verify, don't just accumulate
+
+A feed that only ever adds entries rots. The dates go stale, programs quietly close, and `"deadline": "unknown"` piles up until the feed is a list of links rather than a schedule. **Every run spends part of its budget re-checking what is already in `results.json`**, not only hunting for new things. Do this before the bucket search, because a program that opened yesterday matters more than one you have never heard of.
+
+Each run, re-verify — actually loading each page and then setting `last_checked` — in this priority order:
+
+1. **Everything whose `opens` month is the current month or the next one.** These are the entries about to change state. This is the pass that catches "it opened today," which is the single most valuable thing this feed produces.
+2. **Everything with a real `deadline` inside the next 30 days**, to confirm the date hasn't moved and the posting is still live.
+3. **The 5 oldest `last_checked` entries** otherwise, so nothing goes more than a few weeks unexamined.
+
+When a re-check finds a change, write it into the entry:
+- **It opened.** Replace the `opens` estimate with the real state, put the actual deadline in `deadline` if one is now stated, rewrite `pitch` to lead with the fact that it is open, and — if a specific posting page now exists behind what was a program hub — update `url` to the real posting. **Keep the `id` unchanged.**
+- **A date got published.** Replace `"unknown"` with the real `YYYY-MM-DD`. Chasing `unknown` deadlines into real dates is a standing job, not an optional one.
+- **It closed or the window passed unapplied.** Say so plainly in `pitch` (lead with `MISSED:` when the window closed without an application going in — an honest miss is information; a silently stale entry is a lie), set `opens` to the next expected cycle, and keep the entry so the next cycle is already on the radar.
+- **The page is gone.** Archive it.
+
+**Catch-up rule.** Compare today against the newest `last_checked` in the feed. If more than two days have passed since the last successful sweep — the app was closed, the machine was asleep, a run failed — do **not** treat this as a normal day. Scale the run up: work every watchlist window that opened or closed during the gap, re-verify everything from passes 1 and 2 above rather than a sample, and open the run report with an explicit line naming the gap and anything that was missed inside it. A silent gap is how a two-week window gets lost.
+
 ## Fetching and verification toolkit
 
 Career pages are the worst-behaved pages on the web. Most big-company listings are JavaScript shells that return an empty page or a bare `<title>` to a plain fetch, and several 403 automated requests outright. **A failed fetch is not evidence a program is closed** — it is almost always the wrong door. Work this list before concluding anything, and never downgrade to "I found it in a search snippet."
@@ -120,7 +139,8 @@ Because this runs daily, the cheapest high-value check is polling the ATS of com
   "bullet": "Selected for AI-for-good fellowship building ML tools.",
   "deadline": "2026-08-15",
   "opens": "2026-07",
-  "found_at": "2026-07-07T19:49:05+00:00"
+  "found_at": "2026-07-07T19:49:05+00:00",
+  "last_checked": "2026-07-07"
 }
 ```
 
@@ -138,7 +158,8 @@ Because this runs daily, the cheapest high-value check is polling the ATS of com
 - `bullet`: the past-tense resume bullet I could earn by completing it.
 - `deadline`: `YYYY-MM-DD` from the page, or the literal string `"unknown"` if not stated.
 - `opens`: `YYYY-MM` when the application window opens — the posted month if stated, a best estimate from the prior cycle otherwise; the current month for rolling/already-open applications; `""` if you can't tell. When re-checking an entry, replace the estimate with the real `deadline` as soon as one is posted.
-- `found_at`: this run's UTC timestamp, ISO 8601 with offset.
+- `found_at`: the UTC timestamp of the run that first added this entry, ISO 8601 with offset. **Never change it** — it is what "new since I last looked" is computed from.
+- `last_checked`: `YYYY-MM-DD` of the most recent run that actually re-loaded this entry's page and confirmed its status. Set it every time you verify, whether or not anything changed. An entry with no `last_checked`, or a stale one, is a claim you have stopped standing behind.
 - Unknowable text fields: use `""` (the dashboard renders them as "—"). Never fabricate a value.
 
 ## Scoring rubric

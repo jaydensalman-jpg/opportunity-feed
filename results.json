@@ -83,11 +83,12 @@
     "source": "Big tech sweep",
     "score": 82,
     "level": "early-undergrad",
-    "pitch": "Pre-internship for 1st/2nd-years; 2027 window expected early Oct and lasts ~2 weeks — calendar it now.",
+    "pitch": "Checked Sept 9: no 2027 Ignite dates posted yet. Expected ~Oct 6-20 and only ~2 weeks wide — check daily in Oct.",
     "bullet": "Selected for NVIDIA's Ignite program, working hands-on with NVIDIA engineers on a summer technical project.",
     "deadline": "unknown",
     "found_at": "2026-07-08T04:21:14+00:00",
-    "opens": "2026-10"
+    "opens": "2026-10",
+    "last_checked": "2026-09-09"
   },
   {
     "id": "bigtech:https://www.palantir.com/careers/students-and-early-talent/",
@@ -173,11 +174,12 @@
     "source": "Big tech sweep",
     "score": 80,
     "level": "competitive",
-    "pitch": "Summer 2027 reqs started landing Aug 5 (ops first); SDE postings are next — check amazon.jobs weekly now.",
+    "pitch": "2027 SDE reqs are LIVE as of Sept (Robotics, Annapurna Labs) with Seattle seats — direct postings are in this feed.",
     "bullet": "Built and deployed production services on AWS as an Amazon SDE intern in Seattle.",
     "deadline": "unknown",
     "found_at": "2026-07-08T04:21:14+00:00",
-    "opens": "2026-08"
+    "opens": "2026-08",
+    "last_checked": "2026-09-09"
   },
   {
     "id": "bigtech:https://www.databricks.com/company/careers/university-recruiting",
@@ -263,11 +265,12 @@
     "source": "Niche sweep",
     "score": 75,
     "level": "advanced",
-    "pitch": "Re-checked Aug 11: still closed, page says apps open 'annually, typically around August' for the Jan 2027 start.",
+    "pitch": "Page now reads: program is being 'evolved', applications expected to open Fall 2026. Re-check weekly.",
     "bullet": "Conducted mentored ML research as a Cohere Labs Scholar, contributing to a publishable research project.",
     "deadline": "unknown",
     "found_at": "2026-07-08T04:21:14+00:00",
-    "opens": "2026-08"
+    "opens": "2026-09",
+    "last_checked": "2026-09-09"
   },
   {
     "id": "niche:https://www.outreachy.org/apply/",
@@ -278,11 +281,12 @@
     "source": "Niche sweep",
     "score": 70,
     "level": "open-to-all",
-    "pitch": "Dec 2026 cohort initial apps open late Aug and close early Sept — a ~2-week window, and the essays take time.",
+    "pitch": "MISSED: the Dec 2026 window ran early-to-mid August and has closed. Next is the May 2027 cohort, apps ~Feb 6-13.",
     "bullet": "Completed a paid Outreachy internship contributing production code to a major open-source project.",
     "deadline": "unknown",
     "found_at": "2026-07-08T04:21:14+00:00",
-    "opens": "2026-08"
+    "opens": "2027-02",
+    "last_checked": "2026-09-09"
   },
   {
     "id": "niche:https://fellowship.mlh.com/",
@@ -623,11 +627,12 @@
     "source": "Big tech sweep",
     "score": 80,
     "level": "competitive",
-    "pitch": "Seattle-based 12-wk defense-tech SWE internship, $40-55/hr; review starts Aug 2026 — apply in week one.",
+    "pitch": "Re-verified Sept 9 — still live. Seattle among 9 locations; rolling review since Aug.",
     "bullet": "Built production software for autonomous defense systems as a software engineering intern at Anduril Industries.",
     "deadline": "unknown",
     "opens": "2026-08",
-    "found_at": "2026-08-11T17:53:44+00:00"
+    "found_at": "2026-08-11T17:53:44+00:00",
+    "last_checked": "2026-09-09"
   },
   {
     "id": "bigtech:https://databricks.com/company/careers/open-positions/job?gh_jid=6883068002",
@@ -658,5 +663,37 @@
     "deadline": "unknown",
     "opens": "2026-07",
     "found_at": "2026-08-11T17:53:44+00:00"
+  },
+  {
+    "id": "bigtech:https://www.amazon.jobs/en/jobs/10529525/software-development-engineer-intern-robotics-2027",
+    "title": "SDE Intern, Robotics — 2027",
+    "company": "Amazon",
+    "location": "Seattle, WA + Bellevue, WA (+ Austin, Nashville, Arlington, North Reading, Westboro)",
+    "url": "https://www.amazon.jobs/en/jobs/10529525/software-development-engineer-intern-robotics-2027",
+    "source": "Big tech sweep",
+    "score": 87,
+    "level": "competitive",
+    "pitch": "Open now with Seattle AND Bellevue seats, ~$109K annualized; rolling review — apply this week.",
+    "bullet": "Built and shipped production software for Amazon Robotics systems as a software development engineer intern in Seattle.",
+    "deadline": "unknown",
+    "opens": "2026-09",
+    "found_at": "2026-09-09T10:50:59+00:00",
+    "last_checked": "2026-09-09"
+  },
+  {
+    "id": "bigtech:https://www.amazon.jobs/en/jobs/10517567/software-development-engineer-intern-annapurna-labs-2027",
+    "title": "SDE Intern, Annapurna Labs — 2027",
+    "company": "Amazon",
+    "location": "Seattle, WA (+ Austin, New York, Cupertino)",
+    "url": "https://www.amazon.jobs/en/jobs/10517567/software-development-engineer-intern-annapurna-labs-2027",
+    "source": "Big tech sweep",
+    "score": 85,
+    "level": "competitive",
+    "pitch": "AWS custom-silicon/ML-chip team in Seattle; requires Dec 2027+ graduation — you qualify. $110-160K annualized.",
+    "bullet": "Developed systems software for AWS custom silicon as an Annapurna Labs software development engineer intern.",
+    "deadline": "unknown",
+    "opens": "2026-09",
+    "found_at": "2026-09-09T10:50:59+00:00",
+    "last_checked": "2026-09-09"
   }
 ]
