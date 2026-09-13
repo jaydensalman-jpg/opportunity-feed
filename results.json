@@ -8,11 +8,12 @@
     "source": "Big tech sweep",
     "score": 85,
     "level": "early-undergrad",
-    "pitch": "12-week SWE/PM rotation for 2nd-years at Microsoft's Redmond HQ — a home-turf resume boost.",
+    "pitch": "Checked Sept 13: Explore 2027 NOT posted yet. Only MSFT intern SWE roles live are clearance-gated (CTJ/TS). Keep watching.",
     "bullet": "Selected for Microsoft's Explore Program, rotating through software engineering and product management on a Redmond-based team.",
     "deadline": "unknown",
     "found_at": "2026-07-08T01:16:02+00:00",
-    "opens": "2026-08"
+    "opens": "2026-10",
+    "last_checked": "2026-09-13"
   },
   {
     "id": "bigtech:https://deepmind.google/student-researcher-program/",
@@ -53,11 +54,12 @@
     "source": "Big tech sweep",
     "score": 88,
     "level": "early-undergrad",
-    "pitch": "Google's 1st/2nd-year SWE internship — flagship target; window opens ~Sept and lasts only 2–4 weeks.",
+    "pitch": "No separate ASDI req is live; Google's open Summer 2027 intern posting is the BS one in this feed, closing Sept 25.",
     "bullet": "Selected for Google's Associate Software Developer Internship, shipping production code with a Google engineering team.",
     "deadline": "unknown",
     "found_at": "2026-07-08T04:21:14+00:00",
-    "opens": "2026-09"
+    "opens": "2026-09",
+    "last_checked": "2026-09-13"
   },
   {
     "id": "bigtech:https://www.metacareers.com/careerprograms/students",
@@ -432,11 +434,12 @@
     "source": "Research sweep",
     "score": 77,
     "level": "open-to-all",
-    "pitch": "Paid DOE lab research with housing allowance; Summer 2027 apps open ~Oct, close early Jan — PNNL is in-state.",
+    "pitch": "DEADLINE Sept 30 — but that's the SPRING 2027 term (Feb-May), which collides with spring quarter. Summer 2027 opens later.",
     "bullet": "Conducted data-science research at a DOE national laboratory through the SULI program.",
-    "deadline": "unknown",
+    "deadline": "2026-09-30",
     "found_at": "2026-07-08T04:21:14+00:00",
-    "opens": "2026-10"
+    "opens": "2026-09",
+    "last_checked": "2026-09-13"
   },
   {
     "id": "research:https://www.cs.washington.edu/academics/undergraduate/research-opportunities/",
@@ -492,11 +495,12 @@
     "source": "Uni sweep",
     "score": 75,
     "level": "open-to-all",
-    "pitch": "UW's flagship hackathon (~Oct), largest in the PNW; lowest-effort resume line + recruiter access on campus.",
+    "pitch": "Applications are OPEN now for Oct 17-18 at UW. Cheapest resume line on this list — one weekend, on campus.",
     "bullet": "Built and demoed a working product in 24 hours at DubHacks, the largest hackathon in the Pacific Northwest.",
     "deadline": "unknown",
     "found_at": "2026-07-08T04:21:14+00:00",
-    "opens": "2026-09"
+    "opens": "2026-09",
+    "last_checked": "2026-09-13"
   },
   {
     "id": "uni:https://github.com/zapplyjobs/underclassmen-internships",
@@ -695,5 +699,21 @@
     "opens": "2026-09",
     "found_at": "2026-09-09T10:50:59+00:00",
     "last_checked": "2026-09-09"
+  },
+  {
+    "id": "bigtech:https://www.google.com/about/careers/applications/jobs/results/100648618540573382-software-engineering-intern-bs-summer-2027",
+    "title": "Software Engineering Intern, BS — Summer 2027",
+    "company": "Google",
+    "location": "Seattle, Kirkland, Bellevue & Redmond WA (+30 more US sites)",
+    "url": "https://www.google.com/about/careers/applications/jobs/results/100648618540573382-software-engineering-intern-bs-summer-2027",
+    "source": "Big tech sweep",
+    "score": 92,
+    "level": "competitive",
+    "pitch": "HARD DEADLINE Sept 25. Four WA offices, and it's open to students in ALL academic years — sophomores included.",
+    "bullet": "Shipped production software on a Google engineering team as a Summer 2027 software engineering intern.",
+    "deadline": "2026-09-25",
+    "opens": "2026-09",
+    "found_at": "2026-09-13T23:49:18+00:00",
+    "last_checked": "2026-09-13"
   }
 ]

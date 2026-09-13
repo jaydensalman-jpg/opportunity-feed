@@ -39,8 +39,9 @@
     "why": "Student-led NeuroAI research org with an intro course and real research projects — the cheapest on-ramp to a research bullet.",
     "bullet": "Contributed to a NeuroAI research project through UW's i2 student research organization.",
     "contact": "interintel@uw.edu / Discord",
-    "verified_at": "2026-08-01",
-    "verified": true
+    "verified_at": "2026-09-13",
+    "verified": true,
+    "note": "Page loads and the org is real, but its newest announcement is from 3/29/2025 — confirm the intro course is still running via Discord before relying on it."
   },
   {
     "id": "research:https://www.washington.edu/undergradresearch/",
@@ -50,10 +51,10 @@
     "url": "https://www.washington.edu/undergradresearch/",
     "location": "UW Seattle",
     "cost": "Free (several are paid/funded)",
-    "window": "Research Opportunities Database is always live; WRF Fellowship & Levinson Emerging Scholars run annual cycles",
+    "window": "Research Opportunities Database always live; Levinson Emerging Scholars & WRF Fellowship run annual cycles (no autumn 2026 dates posted as of Sept 13)",
     "why": "The Research Opportunities Database plus 'Reaching Out to a Mentor' guide is the standard path into a faculty AI lab as a sophomore.",
     "bullet": "Conducted undergraduate research in an AI/ML lab at the University of Washington.",
-    "verified_at": "2026-08-01",
+    "verified_at": "2026-09-13",
     "verified": true
   },
   {
