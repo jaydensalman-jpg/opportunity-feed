@@ -27,7 +27,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Poll source commit histories and sync changed README tables
+      - name: Check source histories and sync changed listing data
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: node sync-listings.mjs

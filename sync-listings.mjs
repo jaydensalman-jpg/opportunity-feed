@@ -6,6 +6,7 @@ const SOURCES = [
   { owner: 'vanshb03', repo: 'Summer2027-Internships', label: 'Summer 2027 Internships', path: '.github/scripts/listings.json', ref: 'dev', format: 'json' },
 ];
 const TOKEN = process.env.GITHUB_TOKEN;
+const PARSER_VERSION = 2;
 const HEADERS = {
   Accept: 'application/vnd.github+json',
   'X-GitHub-Api-Version': '2022-11-28',
@@ -98,7 +99,7 @@ function classify(role, details, location, status, sourceRepo) {
   if (/no experience|required experience not|without experience/.test(text)) tags.push('eligibility:no-experience');
   if (!tags.some((tag) => tag.startsWith('eligibility:')) && /intern|undergrad|student|summer analyst|co-op/.test(text)) tags.push('eligibility:all-undergrads');
   if (/machine learning|\bml\b|artificial intelligence|\bai\b|llm|research scientist/.test(text)) tags.push('role:ai-ml');
-  if (/software|developer|frontend|backend|full.?stack|platform|infrastructure|systems/.test(text)) tags.push('role:swe');
+  if (/\bswe\b|\bsde\b|software|developer|frontend|backend|full.?stack|platform|infrastructure|systems/.test(text)) tags.push('role:swe');
   if (/data science|data analyst|analytics|data engineer/.test(text)) tags.push('role:data');
   if (/product manager|\bpm\b|product management/.test(text)) tags.push('role:pm');
   if (/design|ux|user experience/.test(text)) tags.push('role:design');
@@ -245,7 +246,7 @@ function parseJsonListings(input, source, sourceSha) {
       source_url: `https://github.com/${source.owner}/${source.repo}/blob/${sourceSha}/${source.path}`,
       tags: classify(role, details, location, status, `${source.owner}/${source.repo}`),
       closed: Boolean(status),
-      upstream_date: clean(item.date_posted || item.posted_at || ''),
+      upstream_date: clean(item.date_posted || item.posted_at || item.created_at || ''),
     };
     entry.key = rowKey(company, role, location);
     return [entry];
@@ -276,6 +277,7 @@ function parsePatch(patch, source, sha) {
 const feed = await readJson('listings.json', []);
 const archive = await readJson('listings-archive.json', []);
 const state = await readJson('github-state.json', { sources: {} });
+const parserChanged = state.parser_version !== PARSER_VERSION;
 const archiveByKey = new Map(archive.map((item) => [item.key || rowKey(item.company, item.role, item.location), item]));
 let changed = false;
 
@@ -290,12 +292,12 @@ for (const source of SOURCES) {
   }
   const head = commits[0]?.sha;
   if (!head) throw new Error(`No README commit found for ${sourceId}`);
-  if (head === sourceState.sha) continue;
+  if (head === sourceState.sha && !parserChanged) continue;
 
   let added = [];
   let removed = [];
   let fullSnapshot = false;
-  if (!sourceState.sha) {
+  if (!sourceState.sha || parserChanged) {
     const snapshot = await rawSource(source, head);
     added = source.format === 'json' ? parseJsonListings(snapshot, source, head) : [...parseTable(snapshot, source, head), ...parseProgramTables(snapshot, source, head)];
     fullSnapshot = true;
@@ -314,7 +316,7 @@ for (const source of SOURCES) {
   const entries = { ...sourceState.entries };
   if (fullSnapshot) {
     const next = Object.fromEntries(added.map((entry) => {
-      if (sourceState.sha && !entries[entry.key]) entry.discovered_at = now;
+      if (!parserChanged && sourceState.sha && !entries[entry.key]) entry.discovered_at = now;
       return [entry.key, entry];
     }));
     for (const [key, old] of Object.entries(entries)) {
@@ -330,7 +332,7 @@ for (const source of SOURCES) {
       delete entries[entry.key];
     }
     for (const entry of added) {
-      if (!entries[entry.key]) entry.discovered_at = now;
+      if (!parserChanged && !entries[entry.key]) entry.discovered_at = now;
       entries[entry.key] = entry;
     }
     sourceState.entries = entries;
@@ -378,6 +380,7 @@ if (changed) {
   live.sort((a, b) => (b.date_posted || '').localeCompare(a.date_posted || '') || a.company.localeCompare(b.company));
   await saveJson('listings.json', live);
   await saveJson('listings-archive.json', [...archiveByKey.values()].sort((a, b) => (b.archived_at || '').localeCompare(a.archived_at || '')));
+  state.parser_version = PARSER_VERSION;
   await saveJson('github-state.json', state);
   console.log(`Published ${live.length} active unique listings; ${archiveByKey.size} archived.`);
 } else {
