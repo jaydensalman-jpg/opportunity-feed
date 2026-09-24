@@ -67,6 +67,11 @@ function extractLinks(value) {
 function parseDate(value) {
   const s = clean(value);
   if (!s) return '';
+  if (typeof value === 'number' || /^\d{10,13}$/.test(s)) {
+    const n = Number(value);
+    const date = new Date(n < 100000000000 ? n * 1000 : n);
+    return Number.isNaN(date.getTime()) ? '' : date.toISOString().slice(0, 10);
+  }
   if (/^today$/i.test(s)) return today.toISOString().slice(0, 10);
   if (/^yesterday$/i.test(s)) return new Date(today.getTime() - 86400000).toISOString().slice(0, 10);
   const relative = s.match(/^(\d+)\s*(d|day|days|h|hr|hrs|hour|hours)\s*(?:ago)?$/i);
@@ -164,6 +169,60 @@ function parseTable(markdown, source, sourceSha) {
   return parsed;
 }
 
+function parseProgramTables(markdown, source, sourceSha) {
+  const lines = markdown.split(/\r?\n/);
+  const result = [];
+  for (let i = 0; i < lines.length - 2; i++) {
+    if (!lines[i].includes('|')) continue;
+    const headerRow = cells(lines[i]);
+    const header = headerRow.map(normalized);
+    const nameIndex = header.findIndex((h) => /name|program|opportunity/.test(h));
+    const statusIndex = header.findIndex((h) => /status|open date/.test(h));
+    const yearIndex = header.findIndex((h) => /year|class/.test(h));
+    const noteIndex = header.findIndex((h) => /note|description/.test(h));
+    if (nameIndex < 0 || statusIndex < 0 || yearIndex < 0 || !cells(lines[i + 1]).every((cell) => /^:?-{2,}:?$/.test(cell))) continue;
+    i += 1;
+    while (i + 1 < lines.length && lines[i + 1].includes('|')) {
+      const row = cells(lines[++i]);
+      if (row.every((cell) => /^:?-{2,}:?$/.test(cell))) continue;
+      const nameCell = row[nameIndex] || '';
+      const title = clean(nameCell).replace(/https?:\/\/\S+/g, '').trim();
+      if (!title) continue;
+      const roleMatch = title.match(/\b(SWE|software(?: engineering)?|machine learning|AI\s*\/\s*ML|data science|engineering|product management|Explore|Pathfinder|Pathways|SPARX|fellowship|immersion|externship|internship|research program|scholarship|program)\b.*$/i);
+      const role = roleMatch ? roleMatch[0].trim() : 'Internship / program';
+      const company = roleMatch ? title.slice(0, roleMatch.index).replace(/[—–:,(]+$/, '').trim() || title : title;
+      const yearText = clean(row[yearIndex] || '');
+      const statusText = clean(row[statusIndex] || '');
+      const note = clean(row[noteIndex] || '');
+      const tags = classify(role, `${title} ${yearText} ${note}`, '', statusText, `${source.owner}/${source.repo}`);
+      if (/freshman/i.test(yearText) && !tags.includes('eligibility:freshman')) tags.push('eligibility:freshman');
+      if (/sophomore/i.test(yearText) && !tags.includes('eligibility:early-undergrad')) tags.push('eligibility:early-undergrad');
+      if (/all student/i.test(yearText) && !tags.includes('eligibility:all-undergrads')) tags.push('eligibility:all-undergrads');
+      if (/open/i.test(statusText)) tags.push('status:open');
+      else if (!/closed|🔒/i.test(statusText)) tags.push('status:check-source');
+      const entry = {
+        company,
+        role,
+        location: 'Location not listed',
+        apply_url: extractLinks(nameCell),
+        date_posted: '',
+        source_repo: `${source.owner}/${source.repo}`,
+        source_label: source.label,
+        source_url: `https://github.com/${source.owner}/${source.repo}/blob/${sourceSha}/${source.path}`,
+        tags: [...new Set(tags)],
+        closed: /closed|🔒/i.test(statusText),
+        upstream_date: '',
+        upstream_status: statusText,
+        note,
+        eligibility_text: yearText,
+      };
+      entry.key = rowKey(company, role, '');
+      result.push(entry);
+    }
+  }
+  return result;
+}
+
 function parseJsonListings(input, source, sourceSha) {
   const items = Array.isArray(input) ? input : Array.isArray(input?.listings) ? input.listings : [];
   return items.flatMap((item) => {
@@ -238,7 +297,7 @@ for (const source of SOURCES) {
   let fullSnapshot = false;
   if (!sourceState.sha) {
     const snapshot = await rawSource(source, head);
-    added = source.format === 'json' ? parseJsonListings(snapshot, source, head) : parseTable(snapshot, source, head);
+    added = source.format === 'json' ? parseJsonListings(snapshot, source, head) : [...parseTable(snapshot, source, head), ...parseProgramTables(snapshot, source, head)];
     fullSnapshot = true;
   } else {
     const comparison = await api(`https://api.github.com/repos/${sourceId}/compare/${sourceState.sha}...${head}`);
@@ -247,7 +306,7 @@ for (const source of SOURCES) {
       ({ added, removed } = parsePatch(sourceFile.patch, source, head));
     } else {
       const snapshot = await rawSource(source, head);
-      added = source.format === 'json' ? parseJsonListings(snapshot, source, head) : parseTable(snapshot, source, head);
+      added = source.format === 'json' ? parseJsonListings(snapshot, source, head) : [...parseTable(snapshot, source, head), ...parseProgramTables(snapshot, source, head)];
       fullSnapshot = true;
     }
   }
