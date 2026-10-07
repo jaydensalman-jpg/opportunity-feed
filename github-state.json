@@ -1,7 +1,7 @@
 {
   "sources": {
     "zapplyjobs/underclassmen-internships": {
-      "sha": "1f8dfb614cb21af9e9b2d54c31e4b7878dc07895",
+      "sha": "50f94c9d64daca982794168d414820f96edc7b7d",
       "entries": {
         "dropbox|swe intern": {
           "company": "Dropbox",
@@ -909,7 +909,7 @@
           "key": "impact labs|fellowship"
         }
       },
-      "checked_at": "2026-09-24T21:17:47.637Z"
+      "checked_at": "2026-10-07T00:38:48.619Z"
     },
     "vanshb03/Summer2027-Internships": {
       "sha": "609cac4e49c775f77cd419c76026251a4b62163b",
